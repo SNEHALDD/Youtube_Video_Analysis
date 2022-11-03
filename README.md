@@ -56,6 +56,9 @@ You have access to Tableau public.
 
 ## Database Integration
 
+## Dashboard
+### Tool : Tableau Public
+
 ## Contact 
 If you want to contact us, you can reach us at
 
