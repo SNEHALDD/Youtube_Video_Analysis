@@ -1,0 +1,19 @@
+CREATE TABLE channel_data(
+	channel_id varchar PRIMARY KEY NOT NULL,
+	custom_url varchar,
+	channel_view_count bigint,
+	subscriber_count bigint,
+	channel_video_count bigint
+);
+
+CREATE TABLE video_data(
+	channel_id varchar PRIMARY KEY NOT NULL,
+	video_id varchar NOT NULL,
+	category_id int,
+	published_at timestamp,
+	like_count bigint,
+	comment_count bigint,
+	view_count bigint
+);
+
+
