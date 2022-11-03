@@ -31,7 +31,6 @@ Since we are dealing with social media comments, a relational database managemen
 
 ### Tableau
 
-
 Its high ease-of-implementation and visually-appealing visualizations make it an excellent candidate for dashboard creation
 
 ### Javascript/D3.js
