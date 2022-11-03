@@ -16,4 +16,21 @@ CREATE TABLE video_data(
 	view_count bigint
 );
 
+--- join tables together
+SELECT c.channel_id,
+	c.custom_url,
+	c.channel_view_count,
+	c.subscriber_count,
+	c.channel_video_count,
+	v.video_id,
+	v.category_id,
+	v.published_at,
+	v.like_count,
+	v.comment_count,
+	v.view_count
+INTO joined_data
+FROM channel_data AS c
+INNER JOIN video_data AS v
+ON c.channel_id=v.channel_id;
 
+SELECT * FROM joined_data;
