@@ -22,7 +22,7 @@ Since we are dealing with social media comments, a relational database managemen
  - Model used for text sentiment analysis; sensitive to both polarity and intensity of emotion
 
 ### Training and Testing Setup
- - Split data into training and testing sets
+ - Split data into training and testing sets.
  - Use RandomForestClassifier to classify our videos
  - Use VADER to classify youtube comment sentiment
  - Use model to make predictions for testing set  
@@ -31,10 +31,10 @@ Since we are dealing with social media comments, a relational database managemen
 
 ### Tableau
 
-Its high ease-of-implementation and visually-appealing visualizations make it an excellent candidate for dashboard creation
+Its high ease-of-implementation and visually-appealing visualizations make it an excellent candidate for dashboard creatio
 
 ### Javascript/D3.js
 
-We can use the D3.js library due its high interactability and its ability to easily load and transform data
+We can use the D3.js library due its high interactability and its ability to easily load and transform data.
 
 
