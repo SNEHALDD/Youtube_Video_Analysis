@@ -52,16 +52,8 @@ You have access to Tableau public.
 
 ## Machine Learning Model
 
-- The model can be found in the [machine_learning_model.ipynb](https://github.com/SNEHALDD/Youtube_Comments_Bot_Analysis/blob/main/Youtube_Analysis/machine_learning_model.ipynb) file.
-- We used the Scikit-learn library and its CountVectorizer and naive_bayes MultinomialNB modules for the natural language processing.
-- Train_test_split was done on the text of the comments and the classification labels from the provided dataset.
-- Initial model obtains a 91% accuracy rating. 
-- Running the same model on real world dataset does provide output labels, but is flagging 60% of comments as spam, which indicates some adjustments need to be made.
-
-
 ## Database Integration
 
- 
 ## Contact 
 If you want to contact us, you can reach us at
 
