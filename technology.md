@@ -3,7 +3,7 @@
 ## Data Cleaning and Analysis
 
 ### Pandas 
-Will be used to clean the data and perform an exploratory analysis
+Will be used to clean the data and perform an exploratory analysis.
 
 ### Python 
 For further analysis.
