@@ -22,7 +22,7 @@ Our goal is to create a machine learning model that will be trained to predict w
 
 ## Resources
 
-1. Dataset :
+1. Dataset : [Best Youtube Channel for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
 
 2. Software : 
     - Python 3.9.12
