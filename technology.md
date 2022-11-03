@@ -1,4 +1,4 @@
-# Technologies Used
+# Our Technologies
 
 ## Data Cleaning and Analysis
 
