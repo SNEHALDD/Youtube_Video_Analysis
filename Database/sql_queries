@@ -9,10 +9,13 @@ CREATE TABLE channel_data(
 CREATE TABLE video_data(
 	channel_id varchar PRIMARY KEY NOT NULL,
 	video_id varchar NOT NULL,
-	category_id int,
+	video_title_clean varchar,
 	published_at timestamp,
-	like_count bigint,
+	video_madeforkids boolean,
+	tags varchar,
+	video_length time,
 	comment_count bigint,
+	like_count bigint,
 	view_count bigint
 );
 
