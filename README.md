@@ -2,7 +2,7 @@
 
 ## Overview
 
-Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 50,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 200,000 views. If the video can get over 200,000 views than it will be given the value of 1 which equates to viral. If the video would get less than 200,000 views then it would be given the value of 0, for not viral. 
+Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 50,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 200,000 views. If the video can get over 200,000 views than it will be given the value of 1 which equates to viral. If the video would get less than 200,000 views then it would be given the value of 0, for not viral. 
 
 ## Contributors: 
 1. Zara Khan - zaraxkhan - Circle Role
@@ -19,10 +19,9 @@ Our goal is to create a machine learning model that will be trained to predict w
 
 2. Google Drive - Used google drive to keep necessary files and folders in organized manner. We also share next meeting's agenda on this.
 
-
 ## Resources
 
-1. Dataset : [Best Youtube Channel for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
+1. Dataset : [Best Youtube Channels for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
 
 2. Software : 
     - Python 3.9.12
