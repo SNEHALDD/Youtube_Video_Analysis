@@ -75,7 +75,7 @@ We created a database in [Amazon Web Services](https://aws.amazon.com/) and conn
 This [joined file](https://raw.githubusercontent.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/main/Database/ready_for_sql/joined_data.csv) stores all the information we will need in order to begin to train our machine learning model and create the best visualizations possible. 
 
 ### ERD
-Here is the ERD visual which makes the connection of both tables that we joined together to create our final dataframe.
+Here is the [ERD](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/blob/main/Database/ERD.png) visual which makes the connection of both tables that we joined together to create our final dataframe.
 
 ![ERD](https://user-images.githubusercontent.com/105755095/199872407-748a5c31-53f4-4fd2-8765-d25994003606.png)
 
