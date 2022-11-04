@@ -86,6 +86,16 @@ As shown in this [file](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_A
 
 ### Tool : Tableau Public
 
+We will add visualizations of:
+- Total number of subscribers of the channel,
+- Total number of views on the video,
+- Total number of likes on the video.
+- Total length of the video.
+- Ratio of number of subscribers to number of views.
+
+Interactive element(s):
+- Dropdown menu which will list names of all the categories. Once you choose the category, dashboard will show above charts and information of videos.
+
 ## Contact 
 If you want to contact us, you can reach us at
 
