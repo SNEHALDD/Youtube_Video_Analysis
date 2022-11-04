@@ -70,7 +70,7 @@ We created a database in [Amazon Web Services](https://aws.amazon.com/) and conn
 
 ![Screen Shot 2022-11-03 at 9 32 15 PM](https://user-images.githubusercontent.com/105755095/199872556-285db30e-ad21-40b3-a94c-cabef001b8c7.png)
 
-This [joined file]() stores all the information we will need in order to begin to train our machine learning model and create the best visualizations possible. 
+This [joined file](https://raw.githubusercontent.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/main/Database/ready_for_sql/joined_data.csv) stores all the information we will need in order to begin to train our machine learning model and create the best visualizations possible. 
 
 ### ERD
 Here is the ERD visual which makes the connection of both tables that we joined together to create our final dataframe.
