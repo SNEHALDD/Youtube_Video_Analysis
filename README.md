@@ -80,7 +80,7 @@ Here is the [ERD](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysi
 ![ERD](https://user-images.githubusercontent.com/105755095/199872407-748a5c31-53f4-4fd2-8765-d25994003606.png)
 
 ### Connecting to the database
-As shown in this [file](), we will be using psycopg to connect our database that is currently stored in the cloud, to our python file in order to do our machine learning model. 
+As shown in this [file](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/blob/Zara/Database/db_connection.ipynb), we will be using psycopg to connect our database that is currently stored in the cloud, to our python file in order to do our machine learning model. 
 
 ## Dashboard
 
