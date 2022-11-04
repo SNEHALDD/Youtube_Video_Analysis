@@ -24,25 +24,26 @@ Our goal is to create a machine learning model that will be trained to predict w
 
 ## Resources
 
-1. Dataset : [Best Youtube Channels for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
+1. Youtube v3 API (https://www.googleapis.com/youtube/v3)
 
-2. Software : 
+2. Dataset : [Best Youtube Channels for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
+
+3. Software : 
     - Python 3.9.12
     - Scikit-learn 1.0
     - Numpy 1.21.5
     - pandas 1.4.2
     - psycopg2-binary-2.9.5
 
-      
-3. Relational Database : PostgresSQL 11 connected to AWS database server. 
+4. Relational Database : PostgresSQL 11 connected to AWS database server. 
 
-4. Tools / Software : Tableau public, git, pgAdmin, VS Code.
+5. Tools / Software : Tableau public, git, pgAdmin, VS Code.
 
 ## Prerequisites
 
 Before you begin, Please ensure you have met the following requirements:
 
-You have installed updated version of Python, VS Code.   
+You have installed updated version of Python, VS Code, and related dependencies   
 
 You have PostgresSQL 11 installed. 
 
@@ -53,10 +54,19 @@ You have access to Tableau public.
 ## Installation
 
 ## Machine Learning Model
+We are using machine learning to see if we can predict what category a channel belongs to based on its subscriberCount, viewCount, and videoCount.
+
+Features: viewCount, subscriberCount, videoCount
+Targer variable: category_title
+![features](Resources/ml_features.png)
+
+RandomForestClassifier
+![ml_code](Resources/ml_code.png)
 
 ## Database Integration
 
 ## Dashboard
+
 ### Tool : Tableau Public
 
 ## Contact 
@@ -64,8 +74,8 @@ If you want to contact us, you can reach us at
 
  zaraxkhan - [zxkhan.99@gmail.com](mailto:zxkhan.99@gmail.com)
 
- macdkw89 - macdkw@gmail.com 
+ macdkw89 - [macdkw@gmail.com](mailto:macdkw@gmail.com) 
 
  justint42 - [tapiajustin42@gmail.com](mailto:tapiajustin42@gmail.com)
 
- SNEHALDD - snehaldesavle3@gmail.com
+ SNEHALDD - [snehaldesavle3@gmail.com](mailto:snehaldesavle3@gmail.com)
