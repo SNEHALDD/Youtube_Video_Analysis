@@ -37,4 +37,8 @@ Its high ease-of-implementation and visually-appealing visualizations make it an
 
 We can use the D3.js library due its high interactability and its ability to easily load and transform data.
 
+### Plotly Express
+
+Plotly has amazing interactive graphing capabilities that are visually appealing and very versatile.
+
 
