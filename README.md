@@ -27,8 +27,21 @@ We chose 5 million views as our differentiating point of viral vs. not viral. Du
 ## Resources
 
 1. Youtube v3 API (https://www.googleapis.com/youtube/v3)
+    - All data used in this project is sourced directly from the Youtube API
+    - API Resources used
+      - Channels
+      - Comments
+      - CommentThreads
+      - Videos
 
-2. Dataset : [Best Youtube Channels for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
+2. Dataset Category References: 
+   1. [Best Youtube Channels for every category](https://blog.hubspot.com/marketing/best-youtube-channels)
+      - Using this article, we obtained each channel listed under each category for our purposes
+      - We opted to not use the "Yoga" category due to its similarity to the "Fitness" category.
+   2. [List of most-subscribed YouTube channels - Wikipedia](https://en.wikipedia.org/wiki/List_of_most-subscribed_YouTube_channels)
+      - Using this link, we sorted the table and grabbed the top 20 English Language channels by subscriber count for use in our analysis
+      - There are a handful of duplicate channels in this data when compared to the categorical channel list mentioned above. Our analysis will drop these to avoid duplicate entries.
+
 
 3. Software : 
     - Python 3.9.12
@@ -36,6 +49,7 @@ We chose 5 million views as our differentiating point of viral vs. not viral. Du
     - Numpy 1.21.5
     - pandas 1.4.2
     - psycopg2-binary-2.9.5
+    - vaderSentiment - SentimentIntensityAnalyzer
 
 4. Relational Database : PostgresSQL 11 connected to AWS database server. 
 
