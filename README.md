@@ -49,6 +49,7 @@ We chose 5 million views as our differentiating point of viral vs. not viral. Du
     - Numpy 1.21.5
     - pandas 1.4.2
     - psycopg2-binary-2.9.5
+    - vaderSentiment - SentimentIntensityAnalyzer
 
 4. Relational Database : PostgresSQL 11 connected to AWS database server. 
 
