@@ -1,33 +1,58 @@
 CREATE TABLE channel_data(
-	channel_id varchar PRIMARY KEY NOT NULL,
+	channel_id varchar NOT NULL,
 	custom_url varchar,
+	topic_category varchar,
 	channel_view_count bigint,
 	subscriber_count bigint,
-	channel_video_count bigint
+	channel_video_count bigint,
+	PRIMARY KEY (channel_id)
 );
 
 CREATE TABLE video_data(
-	channel_id varchar PRIMARY KEY NOT NULL,
+	channel_id varchar NOT NULL,
 	video_id varchar NOT NULL,
 	video_title_clean varchar,
 	published_at timestamp,
-	video_madeforkids boolean,
-	tags varchar,
-	video_length time,
+	video_length varchar,
 	comment_count bigint,
 	like_count bigint,
-	view_count bigint
+	view_count bigint,
+FOREIGN KEY (channel_id) REFERENCES channel_data (channel_id)
 );
 
+INSERT INTO channel_data
+VALUES ('UC0VOyT2OCBKdQhF3BAbZ-1g','@arianagrandevevo','Music',19286274611,110400000,250);
+INSERT INTO channel_data
+VALUES ('UCANLZYMidaCbLQFWXBC95Jg','@taylorswiftvevo','Music',23828831944,128100000,408);
+INSERT INTO channel_data
+VALUES ('UCDGmojLIoWpXok597xYo8cg','@billieeilishvevo','Music',9073913673,14500000,108);
+INSERT INTO channel_data
+VALUES ('UC-8Q-hLdECwQmaWNwXitYDw','@katyperryvevo','Music',22950321417,22000000,262);
+INSERT INTO channel_data
+VALUES ('UCbW18JZRgko_mOGm5er8Yzg','@onedirectionvevo','Music',11699760120,97000000,255);
+INSERT INTO channel_data
+VALUES ('UClCzrgLk0nayFypiWI7NJ4w','@brunomarsvevo','Music',11610066,540000,2);
+INSERT INTO channel_data
+VALUES ('UCPW4ObAtDezrOGo2gjYOctg','@marshmellovevo','Music',197180486,7820000,13);
+INSERT INTO channel_data
+VALUES ('UCHkj014U2CQ2Nv0UZeYpE_A','@justinbiebervevo','Music',25655480105,31700000,197);
+
+
+
+DROP TABLE channel_data CASCADE;
+DROP TABLE video_data;
+DROP TABLE sentiment_video_data CASCADE;
+DROP TABLE joined_data;
 --- join tables together
 SELECT c.channel_id,
 	c.custom_url,
+	c.topic_category,
 	c.channel_view_count,
 	c.subscriber_count,
 	c.channel_video_count,
 	v.video_id,
-	v.category_id,
 	v.published_at,
+	v.video_length,
 	v.like_count,
 	v.comment_count,
 	v.view_count
