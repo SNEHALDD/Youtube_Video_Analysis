@@ -7,7 +7,6 @@ from Jupyter_Notebook_Files.yt_channels import random_channels
 def load_csv(csv_path):
     return pd.read_csv(csv_path)
 
-
 # load data
 df = pd.read_csv('Database/ready_for_sql/channels_data.csv')
 video_df = pd.read_csv('Database/ready_for_sql/video_data.csv')
