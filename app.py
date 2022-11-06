@@ -1,17 +1,22 @@
 from dash import Dash, html, dcc, Input, Output
+import dash_bootstrap_components as dbc
 import plotly.express as px
-from data_loader import df, joined_dff, grouped_df, video_df, sentiment_df
+from data_loader import df
+from dash_bootstrap_templates import load_figure_template
 
-app = Dash(__name__)
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 fig = px.bar(df.sort_values('viewCount', ascending=False),
-             x="video_category", y="viewCount", title='Total Views by Category', color='video_category', height=600)
+             x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark')
 
-fig2 = px.bar(joined_dff.sort_values('sentiment', ascending=False),
-              x="topic_category", y="sentiment", title='Average Sentiment by Category', color='topic_category', height=600)
-
-fig3 = px.bar(grouped_df.sort_values('viewCount', ascending=False),
-              x="video_category", y="viewCount", title='Total Views by Category', color='video_category', height=600)
+# add legend
+fig.update_layout(legend=dict(
+    orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
 
 # create a list of categories that aren't null
 categories = df['video_category'].unique().tolist()
@@ -20,61 +25,42 @@ categories = df['video_category'].unique().tolist()
 category_options = [{'label': i, 'value': i} for i in categories]
 
 app.layout = html.Div(
+    style={'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'alignItems': 'center'},
+    className='bg-black text-white',
     children=[
-        html.H1(children='YouTube Channel Stats'),
-        html.H1(children=''),
-        html.Div(
-            style={'display': 'flex', 'justifyContent': 'center',
-                   'alignItems': 'left', 'width': '50%'},
-            children=[
-                # create checklist for category_type
-                dcc.Checklist(
-                    id='checklist',
-                    options=category_options,
-                    value=categories,
-                ),
-            ]),
-        html.H1(children=''),
-        html.Div(
-            style={'width': '25%'},
-            children=[
-                html.Label('Select metric to view:'),
-                # add selector for x axis
-                dcc.RadioItems(
-                    id='xaxis', options=[
-                        {'label': 'Views', 'value': 'viewCount'},
-                        {'label': 'Subscribers', 'value': 'subscriberCount'},
-                        {'label': 'Videos', 'value': 'videoCount'},
-                    ],
-                    value='viewCount',
-                )]),
+        html.Link(rel='stylesheet',href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'),
+        html.Div(children=[
+            html.Label('Select metric to view:'),
+            dcc.RadioItems(
+                id='xaxis', options=[
+                    {'label': 'Views', 'value': 'viewCount'},
+                    {'label': 'Subscribers', 'value': 'subscriberCount'},
+                    {'label': 'Videos', 'value': 'videoCount'},
+                ],
+                value='viewCount',
+            ),
+            html.H1(''),
+            html.Label('Select category to view:'),
+            dcc.Checklist(id='checklist',
+                          options=category_options, value=categories),
+            
+        ]),
         dcc.Graph(
             id='bar-chart',
             figure=fig
         ),
-        dcc.Graph(
-            id='bar-chart2',
-            figure=fig2
-        ),
-        dcc.Graph(
-            id='bar-chart3',
-            figure=fig3
-        )
     ])
-
 
 @ app.callback(
     Output('bar-chart', 'figure'),
     Input('checklist', 'value'),
     Input('xaxis', 'value'))
-def update_figure(selected_category, xaxis):
-    # filter the data based on the selected category
-    filtered_df = df[df.video_category.isin(selected_category)]
-    # create the plot
-    fig = px.bar(filtered_df.sort_values(xaxis, ascending=False),
-                 x="video_category", y=xaxis, title='Total Views by Category', color='video_category', height=600)
-    return fig
 
+def update_figure(selected_category, xaxis):
+    filtered_df = df[df.video_category.isin(selected_category)]
+    fig = px.bar(filtered_df.sort_values(xaxis, ascending=False), 
+                 x="video_category", y=xaxis, title=f'Total {xaxis} by Category', template='plotly_dark')
+    return fig
 
 if __name__ == '__main__':
     app.run_server(debug=True)
