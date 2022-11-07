@@ -18,12 +18,6 @@ We chose 5 million views as our differentiating point of viral vs. not viral. Du
 
 4. Snehal Desavale - SNEHALDD - Square Role
 
-## Communication:
-
-1. Slack - Created slack channel to share ideas, make decisions, have video calls, and move work forward with the assignments.
-
-2. Google Drive - Used google drive to keep necessary files and folders in organized manner. We also share next meeting's agenda on this.
-
 ## Resources
 
 1. Youtube v3 API (https://www.googleapis.com/youtube/v3)
