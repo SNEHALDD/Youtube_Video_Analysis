@@ -5,9 +5,9 @@
 Image downloaded form : [How do youtube videos become trending?](https://medium.com/@melodyfs/how-do-videos-become-trending-on-youtube-2690a6622b7d)
 ## Overview
 
-Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 5 million views. If the video can get over 5 million views than it will be given the value of 1 which equates to viral. If the video would get less than 5 million views then it would be given the value of 0, for not viral.
+Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 1 million views. If the video can get over 1 million views than it will be given the value of 1 which equates to viral. If the video would get less than 1 million views then it would be given the value of 0, for not viral.
 
-We chose 5 million views as our differentiating point of viral vs. not viral. Due to a growing number of Internet and social media users, while still a big achievement, reaching that mythical million is no longer as much of a challenge. There are simply too many videos with that many views to make them all stand out. It’s safe to assume that currently, it’s better to aim at gaining at least [5 million views](https://studiopigeon.com/blog/how-many-views-is-viral-what-makes-a-video-viral/#:~:text=There%20are%20simply%20too%20many,the%20benefits%20of%20going%20viral.) to reap the benefits of going viral. So, to answer the question of how many views is viral - there is no simple answer here. In reality, not all viral videos are created equal, so the more views you get, the better, but for our machine learning model's sake, we chose 5 million views. 
+We chose 1 million views as our differentiating point of viral vs. not viral. Due to a growing number of Internet and social media users, while still a big achievement, reaching that mythical million is no longer as much of a challenge. There are simply too many videos with that many views to make them all stand out. It’s safe to assume that currently, it’s better to aim at gaining at least [1 million views](https://mint.intuit.com/blog/relationships/how-much-do-youtubers-make/) to reap the benefits of going viral. If you can get 1 million views on your video that is the equivialant to about $5,000. So, to answer the question of how many views is viral - there is no simple answer here. In reality, not all viral videos are created equal, so the more views you get, the better, but for our machine learning model's sake, we chose 1 million views. 
 
 ## Contributors: 
 1. Zara Khan - zaraxkhan - Circle Role
@@ -17,12 +17,6 @@ We chose 5 million views as our differentiating point of viral vs. not viral. Du
 3. Justin Tapia - justint42 - X Role
 
 4. Snehal Desavale - SNEHALDD - Square Role
-
-## Communication:
-
-1. Slack - Created slack channel to share ideas, make decisions, have video calls, and move work forward with the assignments.
-
-2. Google Drive - Used google drive to keep necessary files and folders in organized manner. We also share next meeting's agenda on this.
 
 ## Resources
 

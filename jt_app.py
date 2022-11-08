@@ -1,11 +1,11 @@
 from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 import plotly.express as px
-from data_loader import df
+from data_loader import grouped_df
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-fig = px.bar(df.sort_values('viewCount', ascending=False),
+fig = px.bar(grouped_df.sort_values('viewCount', ascending=False),
              x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark')
 
 # graph should be full size
@@ -14,7 +14,7 @@ fig.update_layout(
 )
 
 # create a list of categories that aren't null
-categories = df['video_category'].unique().tolist()
+categories = grouped_df['video_category'].unique().tolist()
 
 # create a list of dictionaries for the dropdown
 category_options = [{'label': i, 'value': i} for i in categories]
@@ -64,7 +64,7 @@ app.layout = html.Div(
     Input('checklist', 'value'),
     Input('xaxis', 'value'))
 def update_figure(selected_category, xaxis):
-    filtered_df = df[df.video_category.isin(selected_category)]
+    filtered_df = grouped_df[grouped_df.video_category.isin(selected_category)]
     fig = px.bar(filtered_df.sort_values(xaxis, ascending=False),
                  x="video_category", y=xaxis, title=f'Total {xaxis} by Category', template='plotly_dark')
     return fig
