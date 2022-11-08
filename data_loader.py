@@ -1,4 +1,3 @@
-
 import os
 import pandas as pd
 from Jupyter_Notebook_Files.yt_channels import random_channels
@@ -12,7 +11,7 @@ df = pd.read_csv('Database/ready_for_sql/channels_data.csv')
 video_df = pd.read_csv('Database/ready_for_sql/video_data.csv')
 sentiment_df = pd.read_csv('Database/ready_for_sql/sentiment_data.csv')
 joined_df = pd.read_csv('Database/ready_for_sql/joined_data.csv')
-
+binned_df = pd.read_csv('Database/ready_for_sql/binned_data.csv')
 # join joined_df with sentiment_df
 joined_dff = joined_df.merge(sentiment_df, on='video_id', how='left')
 
