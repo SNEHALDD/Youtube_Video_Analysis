@@ -43,6 +43,7 @@ DROP TABLE channel_data CASCADE;
 DROP TABLE video_data;
 DROP TABLE sentiment_video_data CASCADE;
 DROP TABLE joined_data;
+
 --- join tables together
 SELECT c.channel_id,
 	c.custom_url,
@@ -63,4 +64,57 @@ ON c.channel_id=v.channel_id;
 
 SELECT * FROM joined_data;
 
---create tables of final db
+--create tables of final databases
+CREATE TABLE clean_joined_data (
+	channel_id VARCHAR,
+	custom_url VARCHAR,
+	topic_category VARCHAR,
+	channel_view_count BIGINT,
+	subscriber_count BIGINT,
+	channel_video_count BIGINT,
+	video_id VARCHAR,
+	published_at TIMESTAMP,
+	video_length VARCHAR,
+	like_count BIGINT,
+	comment_count BIGINT,
+	view_count BIGINT
+);
+
+CREATE TABLE clean_binned_data (
+	channel_id VARCHAR,
+	custom_url VARCHAR,
+	topic_category VARCHAR,
+	channel_view_count BIGINT,
+	subscriber_count BIGINT,
+	channel_video_count BIGINT,
+	video_id VARCHAR,
+	published_at TIMESTAMP,
+	video_length VARCHAR,
+	like_count BIGINT,
+	comment_count BIGINT,
+	view_count BIGINT,
+	channel_views_binned VARCHAR,
+	subscribers_binned VARCHAR,
+	video_count_binned VARCHAR,
+	day_of_week_published VARCHAR,
+	like_count_binned VARCHAR,
+	comment_binned VARCHAR,
+	video_views_binned VARCHAR
+);
+
+CREATE TABLE final_df (
+	channel_id VARCHAR,
+	custom_url VARCHAR,
+	topic_category VARCHAR,
+	channel_view_count BIGINT,
+	subscriber_count BIGINT,
+	channel_video_count BIGINT,
+	video_id VARCHAR,
+	video_length VARCHAR,
+	like_count BIGINT,
+	comment_count BIGINT,
+	view_count BIGINT,
+	day_of_week_published VARCHAR,
+	date_published DATE,
+	time_published TIME
+);
