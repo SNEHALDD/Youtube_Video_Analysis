@@ -62,3 +62,5 @@ INNER JOIN video_data AS v
 ON c.channel_id=v.channel_id;
 
 SELECT * FROM joined_data;
+
+--create tables of final db
