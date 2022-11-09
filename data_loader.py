@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 from Jupyter_Notebook_Files.yt_channels import random_channels
 

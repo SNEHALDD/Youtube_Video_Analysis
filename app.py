@@ -8,13 +8,23 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 fig = px.bar(df.sort_values('viewCount', ascending=False),
              x="video_category", y="viewCount", title='Total Views by Category', template='plotly_dark', height=600, width=1000)
 fig.update_traces(marker_color='red')
+
 # box plots for sentiment analysis in each category
 fig2 = px.box(binned_sentiment_df, x="topic_category", y="sentiment", title='Analysis by Category', template='plotly_dark', height=600, width=1000)
 fig2.update_traces(marker_color='red')
+
 # 3d scatter plot
 fig3 = px.scatter_3d(binned_df.groupby('topic_category').mean().reset_index(), x="channel_video_count", y="channel_view_count", z="like_count", color="topic_category", title='3D Scatter Plot', template='plotly_dark', height=600, width=1000)
-# use seaborn colors
 fig3.update_traces(marker=dict(size=8, line=dict(width=2, color='DarkSlateGrey'), opacity=0.8))
+
+
+# make a chart of the published dates for each video 
+fig4 = px.histogram(binned_df, x="day_of_week_published", title='Published Date', template='plotly_dark', height=600, width=1000)
+fig4.update_traces(marker_color='red')
+
+
+'''channel_id,custom_url,topic_category,channel_view_count,subscriber_count,channel_video_count,video_id,published_at,video_length,like_count,comment_count,
+view_count,channel_views_binned,subscribers_binned,video_count_binned,day_of_week_published,like_count_binned,comment_binned,video_views_binned'''
 
 # create a list of categories that aren't null
 categories = df['video_category'].unique().tolist()
@@ -28,7 +38,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
     # link to stylesheet
     html.Link(rel='stylesheet', href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'),
     # Header
-    html.H1(children='YouTube Data Analysis'),
+    html.H1(children='YouTube Top Channels Trend Analysis'),
     html.P(style={'color': 'white'}, children='This is a dashboard that displays data from YouTube channels.'),
     # Line break
     html.Hr(),
@@ -58,7 +68,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
                           options=category_options, value=categories),
         ]),
         # Container for right side of first section
-        html.Div(className='col-8', children=[
+        html.Div(className='col-10', children=[
             # Graph
             dcc.Graph(
                 id='bar-chart',
@@ -108,6 +118,24 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
     ]),
     # Line break
     html.Hr(),
+    # Section title
+    html.H3(children='4th Section'),
+    # Container for third section
+    html.Div(className='row', style={'color': 'white'}, children=[
+        # Container for left side of third section
+        html.Div(className='col-2', children=[
+            html.H5('Something new goes here'),
+        ]),
+        # Container for right side of third section
+        html.Div(className='col-8', children=[
+            html.H5('Something new goes here'),
+            # Graph
+            dcc.Graph(
+                id='histogram',
+                figure=fig4
+            ),
+        ])
+    ]),
 ]
 )
 
