@@ -9,7 +9,6 @@ fig = px.bar(df.sort_values('viewCount', ascending=False),
              x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark', height=600, width=800)
 
 
-
 # graph should be full size
 fig.update_layout(
     autosize=True,
@@ -27,6 +26,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
               ),
     html.H1(children='YouTube Data Analysis'),
     html.Hr(),
+    html.H3(children='Category Metrics'),
     html.Div(className='row', style={'color': 'white'}, children=[
         html.Div(className='col-4', children=[
             html.H5('Select metric to view:'),
@@ -50,9 +50,22 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
             ),
         ])
     ]
-    )
+    ),
+    html.Hr(),
+    html.Div(className='row', style={'color': 'white'}, children=[
+        html.Div(className='col-4', children=[
+            html.H5('Something new goes here'),
+        ]),
+        html.Div(className='col-8', children=[
+            dcc.Graph(
+                id='bar-chart2',
+                figure=fig
+            ),
+        ])
+    ]),
 ]
 )
+
 
 @ app.callback(
     Output('bar-chart', 'figure'),
