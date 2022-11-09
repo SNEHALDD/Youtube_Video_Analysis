@@ -16,7 +16,7 @@ binned_df = pd.read_csv('Database/ready_for_sql/binned_joined_data.csv')
 '''channel_id,custom_url,topic_category,channel_view_count,subscriber_count,channel_video_count,video_id,published_at,video_length,like_count,comment_count,
 view_count,channel_views_binned,subscribers_binned,video_count_binned,day_of_week_published,like_count_binned,comment_binned,video_views_binned'''
 
-df['video_category'] = df['video_category'].replace('Classical_music', 'Music')
+'''df['video_category'] = df['video_category'].replace('Classical_music', 'Music')
 df['video_category'] = df['video_category'].replace('Rock_music', 'Music')
 df['video_category'] = df['video_category'].replace('Pop_music', 'Music')
 df['video_category'] = df['video_category'].replace('Hip_hop_music', 'Music')
@@ -27,10 +27,10 @@ df['video_category'] = df['video_category'].replace('Video_game_culture', 'Video
 df['video_category'] = df['video_category'].replace('Film', 'Entertainment')
 df['video_category'] = df['video_category'].replace('Television_program', 'Entertainment')
 df['video_category'] = df['video_category'].replace('Physical_fitness', 'Sport')
-df['video_category'] = df['video_category'].replace('Tourism', 'Lifestyle')
+df['video_category'] = df['video_category'].replace('Tourism', 'Lifestyle')'''
 
 
-# change all classical_music to music
+'''# change all classical_music to music
 binned_df['topic_category'] = binned_df['topic_category'].replace('Classical_music', 'Music')
 binned_df['topic_category'] = binned_df['topic_category'].replace('Rock_music', 'Music')
 binned_df['topic_category'] = binned_df['topic_category'].replace('Pop_music', 'Music')
@@ -44,7 +44,7 @@ binned_df['topic_category'] = binned_df['topic_category'].replace('Television_pr
 binned_df['topic_category'] = binned_df['topic_category'].replace('Physical_fitness', 'Sport')
 binned_df['topic_category'] = binned_df['topic_category'].replace('Tourism', 'Lifestyle')
 binned_df['topic_category'] = binned_df['topic_category'].replace('American_football', 'Sport')
-binned_df['topic_category'] = binned_df['topic_category'].replace('Christian_music', 'Music')
+binned_df['topic_category'] = binned_df['topic_category'].replace('Christian_music', 'Music')'''
 
 # join sentiment data to binned_df
 binned_sentiment_df = binned_df.merge(sentiment_df, on='video_id', how='left')
