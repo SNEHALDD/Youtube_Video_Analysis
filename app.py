@@ -22,14 +22,20 @@ category_options = [{'label': i, 'value': i} for i in categories]
 
 app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
     html.Link(rel='stylesheet',
-                  href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'
-              ),
+                  href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'),
+    # Header
     html.H1(children='YouTube Data Analysis'),
+    # Line break
     html.Hr(),
+    # Section title
     html.H3(children='Category Metrics'),
+    # Container for first section
     html.Div(className='row', style={'color': 'white'}, children=[
+        # Container for left side of first section
         html.Div(className='col-4', children=[
+            # Label for selections
             html.H5('Select metric to view:'),
+            # Selections
             dcc.RadioItems(
                 id='xaxis', options=[
                     {'label': 'Views', 'value': 'viewCount'},
@@ -38,12 +44,17 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
                 ],
                 value='viewCount',
             ),
+            # space
             html.H1(''),
+            # Label for category selection
             html.H5('Select category to view:'),
+            # Category selection
             dcc.Checklist(id='checklist',
                           options=category_options, value=categories),
         ]),
+        # Container for right side of first section
         html.Div(className='col-8', children=[
+            # Graph
             dcc.Graph(
                 id='bar-chart',
                 figure=fig
@@ -51,12 +62,19 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
         ])
     ]
     ),
+    # Line break
     html.Hr(),
+    # Section title
+    html.H3(children='Sentiment Analysis'),
+    # Container for second section
     html.Div(className='row', style={'color': 'white'}, children=[
+        # Container for left side of second section
         html.Div(className='col-4', children=[
             html.H5('Something new goes here'),
         ]),
+        # Container for right side of second section
         html.Div(className='col-8', children=[
+            # Graph
             dcc.Graph(
                 id='bar-chart2',
                 figure=fig
