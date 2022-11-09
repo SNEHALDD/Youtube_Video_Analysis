@@ -88,7 +88,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
             html.H5('Something new goes here'),
         ]),
         # Container for right side of second section
-        html.Div(className='col-8', children=[
+        html.Div(className='col-10', children=[
             # Graph
             dcc.Graph(
                 id='box-plots',
@@ -107,7 +107,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
             html.H5('Something new goes here'),
         ]),
         # Container for right side of third section
-        html.Div(className='col-8', children=[
+        html.Div(className='col-10', children=[
             html.H5('Something new goes here'),
             # Graph
             dcc.Graph(
@@ -127,7 +127,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
             html.H5('Something new goes here'),
         ]),
         # Container for right side of third section
-        html.Div(className='col-8', children=[
+        html.Div(className='col-10', children=[
             html.H5('Something new goes here'),
             # Graph
             dcc.Graph(
