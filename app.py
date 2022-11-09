@@ -6,11 +6,11 @@ from data_loader import df, binned_df, binned_sentiment_df
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 fig = px.bar(df.sort_values('viewCount', ascending=False),
-             x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark', height=600, width=1000)
-
+             x="video_category", y="viewCount", title='Total Views by Category', template='plotly_dark', height=600, width=1000)
+fig.update_traces(marker_color='red')
 # box plots for sentiment analysis in each category
 fig2 = px.box(binned_sentiment_df, x="topic_category", y="sentiment", title='Analysis by Category', template='plotly_dark', height=600, width=1000)
-
+fig2.update_traces(marker_color='red')
 # 3d scatter plot
 fig3 = px.scatter_3d(binned_df.groupby('topic_category').mean().reset_index(), x="channel_video_count", y="channel_view_count", z="like_count", color="topic_category", title='3D Scatter Plot', template='plotly_dark', height=600, width=1000)
 # use seaborn colors
@@ -120,7 +120,7 @@ def update_figure(selected_category, xaxis):
     filtered_df = df[df.video_category.isin(selected_category)]
     fig = px.bar(filtered_df.sort_values(xaxis, ascending=False),
                  x="video_category", y=xaxis, title=f'Total {xaxis} by Category', template='plotly_dark', height=600, width=1000)
-    
+    fig.update_traces(marker_color='red')
     return fig
 
 if __name__ == '__main__':
