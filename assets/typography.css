@@ -1,12 +1,16 @@
 body {
     font-family: sans-serif;
-    background-color: black;
+    background-color: rgb(57, 57, 57);
     color:white;
 
 }
-h1, h2, h3, h4, h5, h6 {
+
+h4, h5, h6 {
     color: white;
 }
 
-/* Path: assets\header.css */
+h1, h2, h3  {
+    color: red
+}
+
 

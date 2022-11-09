@@ -1,18 +1,20 @@
 from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 import plotly.express as px
-from data_loader import df
+from data_loader import df, binned_df, binned_sentiment_df
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 fig = px.bar(df.sort_values('viewCount', ascending=False),
-             x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark', height=600, width=800)
+             x="video_category", y="viewCount", title='Total Views by Category', color='video_category', template='plotly_dark', height=600, width=1000)
 
+# box plots for sentiment analysis in each category
+fig2 = px.box(binned_sentiment_df, x="topic_category", y="sentiment", title='Analysis by Category', template='plotly_dark', height=600, width=1000)
 
-# graph should be full size
-fig.update_layout(
-    autosize=True,
-)
+# 3d scatter plot
+fig3 = px.scatter_3d(binned_df.groupby('topic_category').mean().reset_index(), x="channel_video_count", y="channel_view_count", z="like_count", color="topic_category", title='3D Scatter Plot', template='plotly_dark', height=600, width=1000)
+# use seaborn colors
+fig3.update_traces(marker=dict(size=8, line=dict(width=2, color='DarkSlateGrey'), opacity=0.8))
 
 # create a list of categories that aren't null
 categories = df['video_category'].unique().tolist()
@@ -20,11 +22,14 @@ categories = df['video_category'].unique().tolist()
 # create a list of dictionaries for the dropdown
 category_options = [{'label': i, 'value': i} for i in categories]
 
+# The apps layout begins here
+
 app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
-    html.Link(rel='stylesheet',
-                  href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'),
+    # link to stylesheet
+    html.Link(rel='stylesheet', href='https://codepen.io/chriddyp/pen/bWLwgP.css', type='text/css'),
     # Header
     html.H1(children='YouTube Data Analysis'),
+    html.P(style={'color': 'white'}, children='This is a dashboard that displays data from YouTube channels.'),
     # Line break
     html.Hr(),
     # Section title
@@ -32,7 +37,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
     # Container for first section
     html.Div(className='row', style={'color': 'white'}, children=[
         # Container for left side of first section
-        html.Div(className='col-4', children=[
+        html.Div(className='col-2', children=[
             # Label for selections
             html.H5('Select metric to view:'),
             # Selections
@@ -59,42 +64,64 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
                 id='bar-chart',
                 figure=fig
             ),
-        ])
-    ]
-    ),
+            html.P('Analysis commentary goes here')
+        ]),
+    ]),
     # Line break
     html.Hr(),
     # Section title
-    html.H3(children='Sentiment Analysis'),
+    html.H3(children='Comment Sentiment Analysis by Category'),
     # Container for second section
     html.Div(className='row', style={'color': 'white'}, children=[
         # Container for left side of second section
-        html.Div(className='col-4', children=[
+        html.Div(className='col-2', children=[
             html.H5('Something new goes here'),
         ]),
         # Container for right side of second section
         html.Div(className='col-8', children=[
             # Graph
             dcc.Graph(
-                id='bar-chart2',
-                figure=fig
+                id='box-plots',
+                figure=fig2
             ),
         ])
     ]),
+    # Line break
+    html.Hr(),
+    # Section title
+    html.H3(children='3rd Section'),
+    # Container for third section
+    html.Div(className='row', style={'color': 'white'}, children=[
+        # Container for left side of third section
+        html.Div(className='col-2', children=[
+            html.H5('Something new goes here'),
+        ]),
+        # Container for right side of third section
+        html.Div(className='col-8', children=[
+            html.H5('Something new goes here'),
+            # Graph
+            dcc.Graph(
+                id='3d-scatter',
+                figure=fig3
+            ),
+        ])
+    ]),
+    # Line break
+    html.Hr(),
 ]
 )
-
 
 @ app.callback(
     Output('bar-chart', 'figure'),
     Input('checklist', 'value'),
     Input('xaxis', 'value'))
+    
 def update_figure(selected_category, xaxis):
     filtered_df = df[df.video_category.isin(selected_category)]
     fig = px.bar(filtered_df.sort_values(xaxis, ascending=False),
                  x="video_category", y=xaxis, title=f'Total {xaxis} by Category', template='plotly_dark', height=600, width=1000)
+    
     return fig
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)

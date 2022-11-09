@@ -11,6 +11,10 @@ df = pd.read_csv('Database/ready_for_sql/channels_data.csv')
 video_df = pd.read_csv('Database/ready_for_sql/video_data.csv')
 sentiment_df = pd.read_csv('Database/ready_for_sql/sentiment_data.csv')
 joined_df = pd.read_csv('Database/ready_for_sql/joined_data.csv')
+binned_df = pd.read_csv('Database/ready_for_sql/binned_joined_data.csv')
+
+# join sentiment data to binned_df
+binned_sentiment_df = binned_df.merge(sentiment_df, on='video_id', how='left')
 
 # join joined_df with sentiment_df
 joined_dff = joined_df.merge(sentiment_df, on='video_id', how='left')
