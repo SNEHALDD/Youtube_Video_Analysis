@@ -45,7 +45,7 @@ app.layout = html.Div(className='body', style={'padding': '10px'}, children=[
     # Section title
     html.H3(children='Category Metrics'),
     # Container for first section
-    html.Div(className='row', style={'color': 'white'}, children=[
+    html.Div(className='row', style={'color': 'white', 'vertical-align': 'top'}, children=[
         # Container for left side of first section
         html.Div(className='col-2', children=[
             # Label for selections
