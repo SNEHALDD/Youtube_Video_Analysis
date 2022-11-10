@@ -2,7 +2,7 @@ from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
-from data_loader import df, binned_df, binned_sentiment_df
+from data_loader_old import df, binned_df, binned_sentiment_df
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 

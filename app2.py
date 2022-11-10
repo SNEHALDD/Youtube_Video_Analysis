@@ -337,7 +337,6 @@ def update_graph(checklist, xaxis):
     fig.update_traces(marker_color='red')
     return fig
 
-
 @app.callback(
     Output('top-channels', 'figure'),
     [Input('yaxis', 'value')],)
@@ -346,7 +345,6 @@ def update_graph(yaxis):
                  y="custom_url", x=yaxis, title='Top Channels', color='topic_category', template=template, height=600, width=1000)
     fig.update_layout(yaxis_categoryorder='total ascending')
     return fig
-
 
 if __name__ == "__main__":
     app.run_server(debug=True)
