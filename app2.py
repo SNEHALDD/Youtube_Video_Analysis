@@ -4,7 +4,8 @@ from dash import Input, Output, dcc, html
 import plotly.express as px
 from app import fig, fig2, fig3, fig4, fig5, df
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+app = dash.Dash(external_stylesheets=[
+                dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
@@ -44,6 +45,8 @@ sidebar = html.Div(
                 dbc.NavLink("Comment Sentiment Analysis",
                             href="/page-2", active="exact"),
                 dbc.NavLink("Video Metrics", href="/page-3", active="exact"),
+                dbc.NavLink("Machine Learning Analysis",
+                            href="/page-4", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -79,7 +82,7 @@ def render_page_content(pathname):
                                      id='xaxis', options=[
                                          {'label': ' Views', 'value': 'viewCount'},
                                          {'label': ' Subscribers',
-                                            'value': 'subscriberCount'},
+                                          'value': 'subscriberCount'},
                                          {'label': ' Videos',
                                              'value': 'videoCount'},
                                      ],
@@ -156,6 +159,19 @@ def render_page_content(pathname):
                              ])
                          ])
                          ]),
+# ------------------------------------------------------------
+    elif pathname == "/page-4":
+        return html.Div([html.H3(children='Machine Learning Analysis'),
+                         # Container for fourth section
+                         html.Div(className='row', children=[
+                             # Container for left side of fourth section
+                             html.Div(children=[
+                                 html.H5(
+                                     'Information about ML goes here'),
+                             ]),
+                         ])
+                         ])
+# ------------------------------------------------------------
 
     # If the user tries to reach a different page, return a 404 message
     return html.Div(
