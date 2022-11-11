@@ -6,5 +6,6 @@ I performed the Machine Learning Portion for the segment, editted the slides for
 ## Snehal
 
 ## Kevin
+I built the app.py file for the Plotly Dashboard, connected the dashboard to postgres with the data_loader.py, and created visualizations of the data. 
 
 ## Justin
