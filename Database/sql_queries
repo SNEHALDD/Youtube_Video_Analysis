@@ -123,7 +123,13 @@ CREATE TABLE video_length(
 	video_id VARCHAR,
 	video_length_seconds FLOAT
 );
-DROP TABLE video_length;
+DROP TABLE video_length_seconds;
+
+CREATE TABLE video_length_seconds(
+	video_id VARCHAR,
+	video_length INT,
+	video_length_seconds FLOAT
+);
 --- join video length to final df and binned df
 SELECT f.channel_id,
 	f.custom_url,
@@ -170,4 +176,5 @@ FROM clean_binned_data as b
 INNER JOIN video_length as v
 ON b.video_id=v.video_id;
 
+DROP TABLE new_binned_df;
 SELECT * FROM new_binned_df;
