@@ -2,8 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 import plotly.express as px
 from dash import Input, Output, dcc, html
-from create_charts import fig, fig2, fig4, fig5, fig6, template
-from data_loader2 import (category_data, channel_data, joined_data, video_data,
+from create_charts import fig, fig2, fig4, fig5, fig6, fig7, template
+from data_loader import (category_data, channel_data, joined_data, video_data,
                           video_sentiment_data)
 
 app = dash.Dash(external_stylesheets=[
@@ -52,6 +52,8 @@ sidebar = html.Div([
                         href="/page-3", active="exact"),
             dbc.NavLink("Machine Learning Analysis",
                         href="/page-4", active="exact"),
+            dbc.NavLink("ML Viz", href="/page-7", 
+                        active="exact"),
             dbc.NavLink("Additional Analysis (Tableau)",
                         href="/page-6", active="exact"),
         ],
@@ -429,6 +431,96 @@ After Resample:
                              'tableau.html', 'r').read(), width='100%', height='1000')
                          ])
 # ------------------------------------------------------------
+# ML Viz
+    elif pathname == "/page-7":
+        return html.Div([html.H3(children='Machine Learning Visualizations'),
+                         html.Hr(),
+                         # Container for first section
+                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
+                             # Container for left side of first section
+                             html.Div(className='col-1', children=[
+                                 # Label for selections
+                                html.H5('Select features to view:'),
+                                html.Hr(),
+                                html.P('Feature 1:'),
+                                 # Selections
+                                 dcc.RadioItems(
+                                     id='ml-feature-1', options=[
+                                         {'label': ' Topic Category',
+                                          'value': 'topic_category'},
+                                         {'label': ' Channel Views',
+                                          'value': 'channel_view_count'},
+                                         {'label': ' Subscribers',
+                                         'value': 'subscriber_count'},
+                                         {'label': ' Channel Video Count',
+                                            'value': 'channel_video_count'},
+                                            {'label': ' Number of Likes',
+                                            'value': 'like_count'},
+                                            {'label': ' Number of Comments',
+                                            'value': 'comment_count'},
+                                            {'label': ' Weekday Published',
+                                            'value': 'day_of_week_published'},
+                                     ],
+                                     value='channel_view_count',
+                                     labelStyle={'display': 'block'}
+                                 ),
+                                 html.Hr(),
+                                 html.P('Feature 2:'),
+                                 dcc.RadioItems(
+                                     id='ml-feature-2', options=[
+                                         {'label': ' Topic Category',
+                                          'value': 'topic_category'},
+                                         {'label': ' Channel Views',
+                                          'value': 'channel_view_count'},
+                                         {'label': ' Subscribers',
+                                         'value': 'subscriber_count'},
+                                         {'label': ' Channel Video Count',
+                                            'value': 'channel_video_count'},
+                                            {'label': ' Number of Likes',
+                                            'value': 'like_count'},
+                                            {'label': ' Number of Comments',
+                                            'value': 'comment_count'},
+                                            {'label': ' Weekday Published',
+                                            'value': 'day_of_week_published'},
+                                     ],
+                                     value='subscriber_count',
+                                     labelStyle={'display': 'block'}
+                                 ),
+                                 html.Hr(),
+                                 html.P('Feature 3:'),
+                                 dcc.RadioItems(
+                                     id='ml-feature-3', options=[
+                                         {'label': ' Topic Category',
+                                          'value': 'topic_category'},
+                                         {'label': ' Channel Views',
+                                          'value': 'channel_view_count'},
+                                         {'label': ' Subscribers',
+                                         'value': 'subscriber_count'},
+                                         {'label': ' Channel Video Count',
+                                            'value': 'channel_video_count'},
+                                            {'label': ' Number of Likes',
+                                            'value': 'like_count'},
+                                            {'label': ' Number of Comments',
+                                            'value': 'comment_count'},
+                                            {'label': ' Weekday Published',
+                                            'value': 'day_of_week_published'},
+                                     ],
+                                     value='comment_count',
+                                     labelStyle={'display': 'block'}
+                                 ),
+                             ]),
+                             # Container for right side of first section
+                             html.Div(className='col-11', children=[
+                                 # Graph
+                                 dcc.Graph(
+                                     id='ml-viz',
+                                     figure=fig7
+                                 ),
+                             ]),
+                         ]),
+                         ]
+                        )
+# ------------------------------------------------------------
 # Error404
     return html.Div(
         [
@@ -438,7 +530,6 @@ After Resample:
         ],
         className="p-3 bg-light rounded-3",
     )
-
 
 @app.callback(
     Output('bar-chart', 'figure'),
@@ -450,7 +541,6 @@ def update_graph(checklist, xaxis):
                  x="topic_category", y=xaxis, title=f'Total {xaxis} by Category', height=600, width=1000)
     fig.update_traces(marker_color='red')
     return fig
-
 
 @app.callback(
     Output('box-plots', 'figure'),
@@ -464,7 +554,6 @@ def update_graph(checklist, xaxis):
     fig.update_traces(marker_color='red')
     return fig
 
-
 @app.callback(
     Output('top-channels', 'figure'),
     [Input('yaxis', 'value')],)
@@ -474,6 +563,15 @@ def update_graph(yaxis):
     fig.update_layout(yaxis_categoryorder='total ascending')
     return fig
 
-
+@app.callback(
+    Output('ml-viz', 'figure'),
+    [Input('ml-feature-1', 'value'),
+        Input('ml-feature-2', 'value'),
+        Input('ml-feature-3', 'value')],)
+def update_graph(feature1, feature2, feature3):
+    fig = px.scatter_3d(video_sentiment_data, x=feature1, y=feature2, z=feature3,
+                        color='topic_category', template=template, height=800, width=1600)
+    return fig
+    
 if __name__ == "__main__":
     app.run_server(debug=True)
