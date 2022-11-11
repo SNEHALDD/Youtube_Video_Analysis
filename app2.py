@@ -75,9 +75,9 @@ def render_page_content(pathname):
     # ------------------------------------------------------------
     if pathname == "/":
         return html.Div([
-            dcc.Markdown('''# Youtube_Video_Analysis
+            dcc.Markdown('''# Youtube Video Analysis Home Page
 
-![Image_Youtube_Trending](https://user-images.githubusercontent.com/106944351/199649897-df66341d-4029-40dd-b173-17aee2148b42.jpeg)
+![Yt](https://user-images.githubusercontent.com/106944351/201234042-db372118-b1d8-4b86-9ba5-79c52e7a63eb.jpeg)
 
 ## Overview
 
@@ -86,13 +86,13 @@ Our goal is to create a machine learning model that will be trained to predict w
 We chose 1 million views as our differentiating point of viral vs. not viral. Due to a growing number of Internet and social media users, while still a big achievement, reaching that mythical million is no longer as much of a challenge. There are simply too many videos with that many views to make them all stand out. It’s safe to assume that currently, it’s better to aim at gaining at least [1 million views](https://mint.intuit.com/blog/relationships/how-much-do-youtubers-make/) to reap the benefits of going viral. If you can get 1 million views on your video that is the equivialant to about $5,000. So, to answer the question of how many views is viral - there is no simple answer here. In reality, not all viral videos are created equal, so the more views you get, the better, but for our machine learning model's sake, we chose 1 million views. 
 
 ## Contributors: 
-1. Zara Khan - zaraxkhan 
+1. Zara Khan - zaraxkhan - Circle Role
 
-2. Kevin MacDonald - macdkw89 
+2. Kevin MacDonald - macdkw89 - Triangle Role
 
-3. Justin Tapia - justint42 
+3. Justin Tapia - justint42 - X Role
 
-4. Snehal Desavale - SNEHALDD 
+4. Snehal Desavale - SNEHALDD - Square Role
 
 ## Resources
 
@@ -124,6 +124,7 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
 4. Relational Database : PostgresSQL 11 connected to AWS database server. 
 
 5. Tools / Software : Tableau public, git, pgAdmin, VS Code.
+
 ''')],)
 
 # ------------------------------------------------------------
