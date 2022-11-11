@@ -17,7 +17,6 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     "width": "20rem",
     "padding": "2rem 1rem",
-
 }
 
 # the styles for the main content position it to the right of the sidebar and
@@ -294,12 +293,88 @@ We used this split the first time around for our machine learning portion, befor
 
 ![y_value_count](https://user-images.githubusercontent.com/105755095/201200265-1825b3d8-815a-426a-ac93-cfa2c2e8b38a.png)
 
+![percent_targets](https://user-images.githubusercontent.com/105755095/201201604-0a60e710-2e34-4bf0-b954-3306d3b43b92.png)
+
+![graph_target](https://user-images.githubusercontent.com/105755095/201201658-e2d6abe6-268e-4700-8c79-ae75cc993bef.png)
+
 Our data was very imbalanced and we needed to use a function that would balance this data. Our instructor suggested we use SMOTEENN as it does both undersampling and oversampling at the same time. After resampling our data, we rechecked the y values and the numbers we much more balanced than before. 
 
 ![smoteenn_code](https://user-images.githubusercontent.com/105755095/201200693-6b314a72-9f8f-4cd7-b1aa-7cf092287b8d.png)
 
-### Model Choice
-Our group choice 3 different machine learning models for our dataset. ''', style={'margin-right': '2%'}),
+### Model Choice 
+Our group choice 3 different machine learning models for our dataset. We started off with the most obvious choice for binary classification which was the Logistic Regression Model. It is a simple model to use and gave a great accuracy score, however, the precision of the viral target was the lowest of the 3 at 87%. This may be die to the fact that that this model is prone to overfitting on the training data. The next model we chose was the Random Forest Model. It was a little slower than the Logistic Regression Model to train, but was the most effective with the best accuracy, presicion, and recall score. We used this model because it is known for both regression and classification, while also preventing overfitting. The last model we used was Adaboost. This was because we wanted to see if this model would be able to do a better job than the Random Forest Model. It did better than the Logistic Regression Model, however it took a longer time than any of the models to train and since our model has a lot of outliars, it was not the best fit for our dataset. We considered it beacause it is refressed to as the best classifier, but due to the outliars in our model, it was not for our dataset. Random Forest did a great job in processing our features and performing on our testing data. 
+
+### Changes in our Model
+The biggest change we made to our model was when we resampled our data and redid the machine learning for all 3 models. This showed a great change in our Classification Reports, especially when it came to the precision of our models calculating if the video was viral. Below are the classification reports and the changes that occured due to the resampling. 
+#### Logistic Regression
+Before Resampling:
+
+![ClassReport_LR](https://user-images.githubusercontent.com/105755095/201206248-13f8a908-6056-414e-b91d-a0e5bf9ac25b.png)
+
+
+After Resampling:
+
+![ClassReport_LR_RS](https://user-images.githubusercontent.com/105755095/201206278-5cf319b3-11e6-4bdd-b67a-0eb44465187c.png)
+
+
+#### Random Forest Model
+Before Resampling:
+
+![CLassReport_RF](https://user-images.githubusercontent.com/105755095/201206363-226ac289-1b57-4377-94ae-5356479712d4.png)
+
+
+After Resampling:
+
+![ClassReport_RF_RS](https://user-images.githubusercontent.com/105755095/201206387-41423988-3526-465e-86ca-08daf3aa6173.png)
+
+#### Easy Ensemble AdaBoost Model
+Before Resample:
+
+![ClassReport_EE](https://user-images.githubusercontent.com/105755095/201206215-6c0452b4-3393-4cc3-b3a8-9672e189db49.png)
+
+
+After Resampling:
+
+![CR_EE_RS](https://user-images.githubusercontent.com/105755095/201206472-db0b4660-9d28-4e48-881b-92bae96a77cc.png)
+
+
+### Results from our Machine Learning Model
+The RandomForest model did a great job in training and learning which features make for a viral video. Giving us an almost 98% accuracy score, the model is able to predict with the features which video will gain 1 million views. It was able to even categorize which features were the most important when making it's calculations:
+
+![Feature_Importance](https://user-images.githubusercontent.com/105755095/201209337-1609cb8a-8209-46b5-8264-0f813bcbe025.png)
+
+Below are the accuracy scores for all 3 models we used;
+
+#### Logistic Regression
+Before Resampling:
+
+![AccuracyScore_LR](https://user-images.githubusercontent.com/105755095/201204409-790dad59-f1ea-4fe1-824d-6353902b1a0a.png)
+
+
+After Resampling:
+
+![accuracyscore_LR_RS](https://user-images.githubusercontent.com/105755095/201204415-13f1e1ab-1617-44bf-b2ff-7f6f61cd9f35.png)
+
+
+#### Random Forest Model
+Before Resampling:
+
+![AccuracyScore_RF](https://user-images.githubusercontent.com/105755095/201204440-286a1556-99ff-490d-a411-3265f57eb218.png)
+
+
+After Resampling:
+
+![AccuracyScore_RF_RS](https://user-images.githubusercontent.com/105755095/201204461-dfc1b217-de1f-4c6b-b6d3-91a83f0132fb.png)
+
+
+#### Easy Ensemble AdaBoost Model
+Before Resample:
+
+![AccuracyScore_EE](https://user-images.githubusercontent.com/105755095/201204358-c2d05b99-23a8-434b-aaaa-ffcfee964a18.png)
+
+After Resample:
+
+![AccuracyScore_EE_RS](https://user-images.githubusercontent.com/105755095/201204399-585b0d69-bda0-4249-95a9-c5f89449df3d.png)''', style={'margin-right': '2%'}),
                          ]),
                          ]),
 
