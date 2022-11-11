@@ -1,4 +1,4 @@
-from data_loader2 import *
+from data_loader import *
 import plotly.express as px
 import pandas as pd
 
@@ -33,3 +33,5 @@ fig5.update_xaxes(ticktext=['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7
 fig6 = px.bar(channel_data.sort_values('channel_view_count', ascending=False).head(20), orientation='h',
                 y="custom_url", x="channel_view_count", title='Top Channels', color='topic_category', template=template, height=600, width=1000)
 fig6.update_layout(yaxis_categoryorder='total ascending')
+
+fig7 = px.scatter_3d(binned_data, x='view_count', y='like_count', z='comment_count', color='video_views_binned', template=template, height=800, width=1600,hover_name="custom_url" )
