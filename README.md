@@ -2,8 +2,6 @@
 
 ![Yt](https://user-images.githubusercontent.com/106944351/201234042-db372118-b1d8-4b86-9ba5-79c52e7a63eb.jpeg)
 
-
-Image downloaded form : [Picture-in-picture mode is coming to YouTube on the desktop]([![Yt](https://user-images.githubusercontent.com/106944351/201234002-294bc105-c2f8-4397-aff3-b6e62191abda.jpeg)](https://betanews.com/2018/03/20/youtube-picture-in-picture/))
 ## Overview
 
 Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 1 million views. If the video can get over 1 million views than it will be given the value of 1 which equates to viral. If the video would get less than 1 million views then it would be given the value of 0, for not viral.
