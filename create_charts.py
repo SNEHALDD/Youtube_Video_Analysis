@@ -2,7 +2,7 @@ from data_loader import *
 import plotly.express as px
 import pandas as pd
 
-template = 'seaborn'
+template = 'plotly_dark'
 # Channel Category Metrics
 fig = px.bar(category_data.sort_values('channel_view_count', ascending=False),
              x="topic_category", y="channel_view_count", title='Total Views by Category', template=template, height=600, width=1000, labels={'topic_category':'Category', 'channel_view_count':'Total Views'})
