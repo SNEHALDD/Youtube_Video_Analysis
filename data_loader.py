@@ -12,7 +12,9 @@ channel_data = pd.read_sql_query('select * from channel_data',con=conn)
 # video_data = pd.read_sql_query('select * from video_data',con=conn)
 joined_data = pd.read_sql_query('select * from joined_data',con=conn)
 binned_data = pd.read_sql_query('select * from clean_binned_data',con=conn)
-# final_df = pd.read_sql_query('select * from final_df',con=conn)
+mega_df = pd.read_sql_query('select * from new_binned_df',con=conn)
+
+
 
 
 category_data = channel_data.groupby('topic_category').sum().reset_index()
@@ -29,3 +31,7 @@ category_data_new['avg_length'] = binned_data2.groupby('topic_category').mean()[
 
 channel_data2 = binned_data2.groupby('channel_id_x').mean().reset_index()
 channel_data2 = channel_data2.merge(binned_data2[['channel_id_x', 'custom_url']], on='channel_id_x', how='left')
+
+mega_df2 = mega_df.merge(sentiment_data, on='video_id', how='left')
+
+mega_df3 = mega_df2.groupby('channel_id_x').agg({'subscriber_count': 'mean', 'view_count': 'mean','comment_count': 'mean', 'sentiment': 'mean', 'video_length_seconds': 'mean', 'topic_category': 'first', 'custom_url': 'first'}).reset_index()

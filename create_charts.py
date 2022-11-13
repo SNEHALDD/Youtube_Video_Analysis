@@ -4,7 +4,7 @@ import pandas as pd
 
 template = 'plotly_dark'
 # Channel Category Metrics
-fig = px.bar(category_data.sort_values('channel_view_count', ascending=False),
+fig = px.bar(category_data_new.sort_values('channel_view_count', ascending=False),
              x="topic_category", y="channel_view_count", title='Total Views by Category', template=template, height=600, width=1000, labels={'topic_category':'Category', 'channel_view_count':'Total Views'})
 fig.update_traces(marker_color='red')
 
@@ -30,16 +30,21 @@ fig5.update_xaxes(ticktext=['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7
                   tickvals=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], tickangle=45)
 
 # Top Channels
-fig6 = px.bar(channel_data.sort_values('channel_view_count', ascending=False).head(20), orientation='h',
-                y="custom_url", x="channel_view_count", title='Top Channels', color='topic_category', template=template, height=600, width=1000)
+fig6 = px.bar(mega_df3.sort_values('view_count', ascending=False).head(20), orientation='h',
+                y="custom_url", x="view_count", title='Top Channels', color='topic_category', template=template, height=600, width=1000)
 fig6.update_layout(yaxis_categoryorder='total ascending')
 
 fig7 = px.scatter_3d(binned_data, x='view_count', y='like_count', z='comment_count', color='video_views_binned', template=template, height=800, width=1600,hover_name="custom_url" )
 
-fig8 = px.scatter_3d(binned_data2, template=template,
-                        x='view_count', y='new_length', z='video_comment_count', color='topic_category', symbol='day_of_week_published', height=600, width=1000, log_x=True, log_y=True, log_z=True, 
-                        labels={'new_length': 'Video Length (seconds)', 'view_count': 'Video Views', 'sentiment': 'Sentiment Score', 'topic_category': 'Category', 'channel_title': 'Channel'},
-                        hover_data=['custom_url', 'topic_category', 'view_count', 'new_length', 'video_title_clean'])
+fig8 = px.scatter_3d(mega_df2, template=template, 
+                        x='view_count', y='video_length_seconds', z='comment_count', color='topic_category', symbol='day_of_week_published', height=600, width=1000, log_x=True, log_y=True, log_z=True, 
+                        labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                               'topic_category': 'Category', 'channel_title': 'Channel'},
+                        hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+fig8.update_layout(
+    margin=dict(l=0,r=0,b=0,t=0),
+    paper_bgcolor="Black"
+    )
 fig8.update_traces(marker=dict(size=3, line=dict(width=1, color='DarkSlateGrey')),
                       selector=dict(mode='markers'))
 fig9 = px.scatter(binned_data2[binned_data2['new_length'] > 5000], x='new_length', y='video_views', template=template, title='Video Lengths vs Views', color='topic_category', height=600, width=1000, labels={'new_length':'Video Length (seconds)', 'video_views':'Views'}, log_y=True)

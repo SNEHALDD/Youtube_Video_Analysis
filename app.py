@@ -3,8 +3,8 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 from dash import Input, Output, dcc, html
 from create_charts import fig, fig2, fig4, fig5, fig6, fig8, fig9, template
-from data_loader import (channel_data, category_data_new, channel_data2,
-                         video_sentiment_data, binned_data2)
+from data_loader import (mega_df2, mega_df3, category_data_new, channel_data,
+                         video_sentiment_data)
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.DARKLY], suppress_callback_exceptions=True)
@@ -34,6 +34,11 @@ categories = category_data_new['topic_category'].unique().tolist()
 # create a list of dictionaries for the dropdown
 category_options = [{'label': i, 'value': i} for i in categories]
 
+
+def transform_value(value):
+    return 10 ** value
+
+
 ml_viz_options_num = [
     {'label': ' Channel Views',
      'value': 'channel_view_count'},
@@ -48,16 +53,36 @@ ml_viz_options_num = [
     {'label': ' Video Views',
         'value': 'view_count'},
     {'label': ' Length of Video',
-     'value': 'new_length'},
+     'value': 'video_length_seconds'},
+    {'label': ' Sentiment Score',
+        'value': 'sentiment'},
 ]
 
-ml_viz_options_cat = [
+
+ml_viz_options_color = [
+    {'label': ' Topic Category',
+        'value': 'topic_category'},
+    {'label': ' Video Views Binned',
+        'value': 'video_views_binned'},
+    {'label': ' View count',
+        'value': 'view_count'},
+    {'label': ' Weekday Published',
+        'value': 'day_of_week_published'},
+    {'label': ' Sentiment Score',
+        'value': 'sentiment'},
+    {'label': ' None',
+        'value': 'none'},
+]
+
+ml_viz_options_symbol = [
     {'label': ' Topic Category',
         'value': 'topic_category'},
     {'label': ' Video Views Binned',
         'value': 'video_views_binned'},
     {'label': ' Weekday Published',
-     'value': 'day_of_week_published'},
+        'value': 'day_of_week_published'},
+    {'label': ' None',
+        'value': 'none'},
 ]
 
 
@@ -86,7 +111,7 @@ sidebar = html.Div([
                         href="/page-3", active="exact"),
             dbc.NavLink("Machine Learning Analysis",
                         href="/page-4", active="exact"),
-            dbc.NavLink("ML Viz", href="/page-7",
+            dbc.NavLink("Machine Learning Visualization", href="/page-7",
                         active="exact"),
             dbc.NavLink("Additional Analysis (Tableau)",
                         href="/page-6", active="exact"),
@@ -110,8 +135,8 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 def render_page_content(pathname):
     # ------------------------------------------------------------
     if pathname == "/":
-        return html.Div([html.H1('Youtube Video Analysis Home Page'), html.Hr(),
-            dcc.Markdown('''
+        return html.Div([html.H1('YouTube Video Analysis Home Page'), html.Hr(),
+                         dcc.Markdown('''
 # Overview
 
 Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 1 million views. If the video can get over 1 million views than it will be given the value of 1 which equates to viral. If the video would get less than 1 million views then it would be given the value of 0, for not viral.
@@ -166,9 +191,9 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
         return html.Div([html.H3(children='Video Metrics by Category'),
                          html.Hr(),
                          # Container for first section
-                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
+                         dbc.Row(children=[
                              # Container for left side of first section
-                             html.Div(className='col-2', children=[
+                             dbc.Col(width="auto", children=[
                                  # Label for selections
                                  html.H5('Select metric to view:'),
                                  # Selections
@@ -208,7 +233,7 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
                                  ),
                              ]),
                              # Container for right side of first section
-                             html.Div(className='col-10', children=[
+                             dbc.Col(width="auto", children=[
                                  # Graph
                                  dcc.Graph(
                                      id='bar-chart',
@@ -225,9 +250,9 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
         return html.Div([html.H3(children='Comment Sentiment Analysis by Category'),
                          html.Hr(),
                          # Container for second section
-                         html.Div(className='row', children=[
+                         dbc.Row(children=[
                              # Container for left side of second section
-                             html.Div(className='col-2', children=[
+                             dbc.Col(width='auto', children=[
                                  # Label for selections
                                  html.H5('Select metric to view:'),
                                  # Selections
@@ -248,7 +273,7 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
                                                options=category_options, value=categories, labelStyle={'display': 'block'}),
                              ]),
                              # Container for right side of second section
-                             html.Div(className='row col-10', children=[
+                             dbc.Col(width='auto', children=[
                                  # Graph
                                  dcc.Graph(
                                      id='box-plots',
@@ -263,14 +288,14 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
         return html.Div([html.H3(children='Video Pubishing Time Metrics'),
                          html.Hr(),
                          # Container for third section
-                         html.Div(className='row', children=[
+                         dbc.Row(children=[
                              # Container for left side of third section
                              # html.Div(className='col-2', children=[
                              #   html.H5(
                              #      'Information about the charts goes here'),
                              # ]),
                              # Container for right side of 4th section
-                             html.Div(className='col-4', children=[
+                             dbc.Col(width='auto', children=[
                                  html.H5('Day of Week'),
                                  # Graph
                                  dcc.Graph(
@@ -279,7 +304,7 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
                                  ),
                              ]),
                              # Container for right side of 4th section
-                             html.Div(className='col-4', children=[
+                             dbc.Col(width='auto', children=[
                                  html.H5('Time of Day (CST)'),
                                  # Graph
                                  dcc.Graph(
@@ -295,7 +320,7 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
         return html.Div([html.H3(children='Machine Learning Analysis'),
                          html.Hr(),
                          # Container for fourth section
-                         html.Div(className='row', children=[
+                         dbc.Row(children=[
                              # Container for left side of fourth section
                              dcc.Markdown('''
 # Machine Learning Model
@@ -431,31 +456,41 @@ After Resample:
         return html.Div([html.H3(children='Top Channel Metrics'),
                          html.Hr(),
                          # Container for first section
-                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
+                         dbc.Row(children=[
                              # Container for left side of first section
-                             html.Div(className='col-2', children=[
+                             dbc.Col(width='auto', children=[
                                  # Label for selections
                                  html.H5('Select metric to view:'),
                                  # Selections
                                  dcc.RadioItems(
                                      id='yaxis', options=[
                                          {'label': ' Views',
-                                          'value': 'channel_view_count'},
+                                          'value': 'view_count'},
                                          {'label': ' Subscribers',
                                           'value': 'subscriber_count'},
-                                         {'label': ' Videos',
-                                          'value': 'channel_video_count'},
-                                        {'label': ' Comments',
+                                         {'label': ' Comments',
                                              'value': 'comment_count'},
-                                         {'label': ' Average Video Length',
-                                             'value': 'avg_video_length'},
+
                                      ],
-                                     value='channel_view_count',
+                                     value='view_count',
                                      labelStyle={'display': 'block'}
                                  ),
+                                 html.Hr(),
+                                 html.H5('Select:'),
+                                 dcc.RadioItems(
+                                     id='tot-mean', options=[
+                                         {'label': ' Average',
+                                          'value': 'mean'},
+                                         {'label': ' Total',
+                                          'value': 'sum'},
+                                     ],
+                                     value='mean',
+                                     labelStyle={'display': 'block'}
+                                 ),
+
                              ]),
                              # Container for right side of first section
-                             html.Div(className='col-10', children=[
+                             dbc.Col(width='auto', children=[
                                  # Graph
                                  dcc.Graph(
                                      id='top-channels',
@@ -474,7 +509,7 @@ After Resample:
         return html.Div([html.H3(children='Tableau Dashboard'),
                          html.Hr(),
                          # add link to visit tableau dashboard
-                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
+                         dbc.Row(children=[
 
                              html.A('Click here to view in Tableau Public',
                                     href='https://public.tableau.com/app/profile/snehal.desavale/viz/YoutubeVideoAnalysis_16680643134020/Dashboard', target='_blank'),
@@ -487,13 +522,13 @@ After Resample:
 # ------------------------------------------------------------
 # ML Viz
     elif pathname == "/page-7":
-        return html.Div([html.Div(className='top-container',children=[html.H3(children='Machine Learning Visualization')]),
+        return html.Div([html.Div(className='top-container', children=[html.H3(children='Machine Learning Visualization')]),
                          html.Hr(),
                          # Container for first section
-                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
-                            html.H5('Select features:'),
+                         dbc.Row(children=[
+                             html.H5('Select features:'),
                              # Container for left side of first section
-                             html.Div(className='col-2', children=[
+                             dbc.Col(width='auto', children=[
                                  # Label for selections
                                  html.P('Feature 1 (X):'),
                                  # Selections
@@ -506,7 +541,7 @@ After Resample:
                                  html.P('Feature 2 (Y):'),
                                  dcc.RadioItems(
                                      id='ml-feature-2', options=ml_viz_options_num,
-                                     value='new_length',
+                                     value='video_length_seconds',
                                      labelStyle={'display': 'block'}
                                  ),
                                  html.Hr(),
@@ -518,39 +553,35 @@ After Resample:
                                  ),
 
                              ]),
-                             html.Div(className='col-2', children=[
+                             dbc.Col(width=2, children=[
                                  html.P('Feature 4 (Color):'),
                                  dcc.RadioItems(
-                                     id='ml-feature-4', options=ml_viz_options_cat,
+                                     id='ml-feature-4', options=ml_viz_options_color,
                                      value='topic_category',
                                      labelStyle={'display': 'block'}
                                  ),
                                  html.Hr(),
                                  html.P('Feature 5 (Shape):'),
                                  dcc.RadioItems(
-                                     id='ml-feature-5', options=ml_viz_options_cat,
+                                     id='ml-feature-5', options=ml_viz_options_symbol,
                                      value='day_of_week_published',
                                      labelStyle={'display': 'block'}
                                  ),
-                                    html.Hr(),
+                                 html.Hr(),
                                  html.H5('Filter by:'),
                                  html.P('Video Length (seconds):'),
                                  dcc.RangeSlider(
                                      id='ml-video-length',
                                      min=0,
-                                     max=binned_data2.max()['new_length'],
-                                     step=1,
-                                     value=[0, binned_data2.max()[
-                                         'new_length']],
+                                     max=4.633,
+                                     step=.001,
+                                     value=[0, 4.633],
                                      marks={
                                         0: '0',
-                                        binned_data2.max()['new_length']*.25: '',
-                                        binned_data2.max()['new_length']/2: '',
-                                        binned_data2.max()['new_length']*.75: '',
-                                        binned_data2.max()['new_length']*1: '',
-                                     },
-                                     tooltip={'always_visible': True,
-                                              'placement': 'bottom'}
+                                        4.633*.25: '15s',
+                                        4.633*.5: '200s',
+                                        4.633*.75: '3000s',
+                                        4.633: 'Max'},
                                  ),
                                  html.Hr(),
 
@@ -558,33 +589,28 @@ After Resample:
                                  dcc.RangeSlider(
                                      id='ml-video-views',
                                      min=0,
-                                     max=float(binned_data2.max()
-                                               ['view_count']),
-                                     step=1,
-                                     value=[
-                                         0, float(binned_data2.max()['view_count'])],
+                                     max=9.317,
+                                     step=.001,
+                                     value=[0, 9.317],
                                      marks={
-                                        float(0): '0',
-                                        float(binned_data2.max()['view_count']*.25): '',
-                                        float(binned_data2.max()['view_count']/2): '',
-                                        float(binned_data2.max()['view_count']*.75): '',
-                                        float(binned_data2.max()['view_count']): '',
-
-                                     },
-                                     tooltip={'always_visible': True,
-                                              'placement': 'bottom'}
+                                        0: '0',
+                                        9.317*.25: '200',
+                                        9.317*.5: '50k',
+                                        9.317*.75: '10M',
+                                        9.317: 'Max'}
                                  ),
                                  html.Hr(),
-                                 html.P(
-                                     'Note: X, Y, and Z axes are on log scale for vizualization purposes'),
+
                              ]),
                              # Container for right side of first section
-                             html.Div(className='col-8', style={'height': '100%'}, 
-                             children=[
+                             dbc.Col(width='auto', style={'height': '100%'},
+                                     children=[
                                  # Graph
                                  dcc.Graph(
                                      id='ml-viz',
-                                     figure=fig8
+                                     figure=fig8,
+                                     loading_state={'is_loading': True}
+
                                  ),
                              ]),
                          ]),
@@ -595,14 +621,14 @@ After Resample:
     elif pathname == "/page-8":
         return html.Div([html.H3(children='Video Length Analysis'),
                          html.Hr(),
-                         html.Div(className='row', style={'verticalAlign': 'top'}, children=[
-                             html.Div(className='col-2', children=[
+                         dbc.Row(children=[
+                             dbc.Col(width='auto', children=[
                                  html.H5('Select features to view:'),
                                  html.Hr(),
                                  html.P('Feature 1 (X):'),
 
                              ]),
-                             html.Div(className='col-8', children=[
+                             dbc.Col(width='auto', children=[
                                  dcc.Graph(
                                      id='video-length-viz',
                                      figure=fig9
@@ -657,32 +683,75 @@ def update_graph(checklist, xaxis):
 
 @app.callback(
     Output('top-channels', 'figure'),
-    [Input('yaxis', 'value')],)
-def update_graph(yaxis):
-    fig = px.bar(channel_data2.sort_values(yaxis, ascending=True).tail(20), orientation='h', labels={'custom_url': 'Channel', 'channel_view_count': 'Total Views', 'subscriber_count': 'Subscribers'},
+    [Input('yaxis', 'value'),
+     Input('tot-mean', 'value')],)
+def update_graph(yaxis, totmean):
+    alt_df = mega_df2.groupby('channel_id_x').agg({'subscriber_count': totmean, 'view_count': totmean, 'comment_count': totmean,
+                                                   'sentiment': totmean, 'video_length_seconds': totmean, 'topic_category': 'first', 'custom_url': 'first'}).reset_index()
+    fig = px.bar(alt_df.sort_values(yaxis, ascending=False).head(20), orientation='h',
                  y="custom_url", x=yaxis, title='Top Channels', color='topic_category', template=template, height=600, width=1000)
     fig.update_layout(yaxis_categoryorder='total ascending')
     return fig
 
 
 @app.callback(
-    Output('ml-viz', 'figure'),
-    [Input('ml-feature-1', 'value'),
+    Output('ml-viz', 'figure'), [
+        Input('ml-feature-1', 'value'),
         Input('ml-feature-2', 'value'),
         Input('ml-feature-3', 'value'),
         Input('ml-feature-4', 'value'),
         Input('ml-feature-5', 'value'),
         Input('ml-video-length', 'value'),
         Input('ml-video-views', 'value'),
-     ],)
+    ],)
 def update_graph(feature1, feature2, feature3, feature4, feature5, length, views):
-    fig = px.scatter_3d(binned_data2[(binned_data2['new_length'] >= length[0]) & (binned_data2['new_length'] <= length[1]) & (binned_data2['view_count'] >= views[0]) & (binned_data2['view_count'] <= views[1])], template=template,
-                        x=feature1, y=feature2, z=feature3, color=feature4, symbol=feature5, height=1000, width=1200, log_x=True, log_y=True, log_z=True,
-                        labels={'new_length': 'Video Length (seconds)', 'view_count': 'Video Views',
-                                'sentiment': 'Sentiment Score', 'topic_category': 'Category', 'channel_title': 'Channel'},
-                        hover_data=['custom_url', 'topic_category', 'view_count', 'new_length', 'video_title_clean'])
+    if feature5 == 'none':
+        if feature4 == 'none':
+            fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+                                x=feature1, y=feature2, z=feature3, height=800, width=1024, log_x=True, log_y=True, log_z=True,
+                                labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                                hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+        else:
+            fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+                                x=feature1, y=feature2, z=feature3, color=feature4, height=800, width=1024, log_x=True, log_y=True, log_z=True,
+                                labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                                hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+    elif feature4 == 'none':
+        fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+                            x=feature1, y=feature2, z=feature3, symbol=feature5, height=800, width=1024, log_x=True, log_y=True, log_z=True,
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                    'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                            hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+    else:
+        fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+                            x=feature1, y=feature2, z=feature3, color=feature4, symbol=feature5, height=800, width=1024, log_x=True, log_y=True, log_z=True,
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                    'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                            hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+
     fig.update_traces(marker=dict(size=3, line=dict(width=1, color='DarkSlateGrey')),
                       selector=dict(mode='markers'))
+    # if feature1 is Sentiment Score, change log_x to False
+    if feature1 == 'sentiment':
+        fig.update_layout(scene=dict(xaxis=dict(type='linear')))
+    # if feature2 is Sentiment Score, change log_y to False
+    if feature2 == 'sentiment':
+        fig.update_layout(scene=dict(yaxis=dict(type='linear')))
+    # if feature3 is Sentiment Score, change log_z to False
+    if feature3 == 'sentiment':
+        fig.update_layout(scene=dict(zaxis=dict(type='linear')))
+    fig.update_layout(
+        margin=dict(l=0, r=0, b=0, t=0),
+        paper_bgcolor="Black"
+    )
+    # increase legend symbol size
+    fig.update_layout(legend=dict(
+        font=dict(
+            size=12,
+        )
+    ))
 
     return fig
 
