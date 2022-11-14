@@ -118,3 +118,63 @@ CREATE TABLE final_df (
 	date_published DATE,
 	time_published TIME
 );
+
+CREATE TABLE video_length(
+	video_id VARCHAR,
+	video_length_seconds FLOAT
+);
+DROP TABLE video_length_seconds;
+
+CREATE TABLE video_length_seconds(
+	video_id VARCHAR,
+	video_length INT,
+	video_length_seconds FLOAT
+);
+--- join video length to final df and binned df
+SELECT f.channel_id,
+	f.custom_url,
+	f.topic_category,
+	f.channel_view_count,
+	f.subscriber_count,
+	f.channel_video_count,
+	f.video_id,
+	f.like_count,
+	f.comment_count,
+	f.view_count,
+	f.day_of_week_published,
+	f.time_published,
+	v.video_length_seconds
+INTO ml_table
+FROM final_df AS f
+INNER JOIN video_length AS v
+ON f.video_id=v.video_id;
+
+SELECT * FROM ml_table;
+
+SELECT b.channel_id,
+	b.custom_url,
+	b.topic_category,
+	b.channel_view_count,
+	b.subscriber_count,
+	b.channel_video_count,
+	b.video_id,
+	b.published_at,
+	b.video_length,
+	b.like_count,
+	b.comment_count,
+	b.view_count,
+	b.channel_views_binned,
+	b.subscribers_binned,
+	b.video_count_binned,
+	b.day_of_week_published,
+	b.like_count_binned,
+	b.comment_binned,
+	b.video_views_binned,
+	v.video_length_seconds
+INTO new_binned_df
+FROM clean_binned_data as b
+INNER JOIN video_length as v
+ON b.video_id=v.video_id;
+
+DROP TABLE new_binned_df;
+SELECT * FROM new_binned_df;
