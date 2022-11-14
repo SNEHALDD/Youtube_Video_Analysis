@@ -74,20 +74,26 @@ Our machine learning question is which features, from the YouTube video itself a
 ### Preprocessing Data
 In order to begin the Machine Learning portion, we must preprocess the feature set of the data. First we encoded the categorical data. We did this for the topic category column and the day of week published column. This turned the categorical values into numerical values. However, for the day of week published column, we decided to go with custom encoding so that the days of week were not assigned random numbers, but instead 1 started with Sunday and 7 was Saturday. You can see the code we used below to encode the columns and then add custom encoding to the last column. 
 
-encoding_code
+![encoding_code](https://user-images.githubusercontent.com/105755095/201760770-6c0e4609-a698-4fd6-8b5f-a3ccd36617ba.png)
 
-encoding_data_table
+
+![encoding_data_table](https://user-images.githubusercontent.com/105755095/201760784-871ee8d6-9fce-4887-827e-6c9e3a0b4cac.png)
+
 
 ![custom_encoding](https://user-images.githubusercontent.com/105755095/201197039-dfad346b-38bf-4505-9b05-22d1e5e77de9.png)
 
-custom_encoding_day
+
+![custom_encoding_day](https://user-images.githubusercontent.com/105755095/201760835-46005efc-bcf1-43d4-b154-3c751717aca0.png)
+
 
 #### Scaling the Data
 Because our columns had some very large numbers, we thought it would be best to scale each column so that every column was on the same playing field. We did this with Standard Scaler from the sklearn package. This standardizes a feature by subtracting the mean and then scaling to unit variance. Unit variance means dividing all the values by the standard deviation. 
 
-scaling_code
+![scaling_code](https://user-images.githubusercontent.com/105755095/201760916-98c6da6b-add9-42b3-8a41-431b1c43516e.png)
 
-scaled_table
+
+![scaled_table](https://user-images.githubusercontent.com/105755095/201760928-d3787885-fcb5-4daf-b7bd-aaacb8805fd9.png)
+
 
 ### Feature Selection
 We selected the features for our machine learning by deciding what data points would effect how much a video is viewed. The first thing we thought of was the channel that posted the video. If the channel has many subscribers than the potential for the video being viewed increases. This can be affected by the amount of videos on their channel. We assumed that the more videos a channel posts, there is a potential that they one of those videos will get many views, so we included that in our machine learning model to test if this was true. FInally, from the channel data we chose topic category as a feature, as well. This would help us analyze whether or not certain topics attract more attention than others and if it was a large enough variable to affect the views a video gets.  We did not want to include the channel's total view count as that would skew the data. We are not only trying to decide if channels with already a large following can reach 1 million views, but also if videos that are random can also reach this threshold. 
@@ -96,24 +102,30 @@ The video data itself also seemed like a legitiment feature to include. How long
 
 After selecting our features, we did a quick correlation matrix to see how our variables correlate with eachother. We did not want each variable to be highly correlated with one another because that leads to multicollinearity, where it becomes a problem because our independent variables should be independent of one another. If the degree of correlation is too high, it can cause problems when we run our machine learning model. As we can see below, our features are not highly correlated with eachother which makes proceeding with the machine learning model viable. 
 
-correlation heatmap
+
+![correlation_heatmap](https://user-images.githubusercontent.com/105755095/201760962-bd7bdb67-18e6-4a90-8347-6e01b035d49c.png)
+
 
 ### Splitting Data
 We split the data using sklearn's train_test_split function. This split our data as the default 80% for training and 20% for testing.
 
-resample_shape
+![resample_shape](https://user-images.githubusercontent.com/105755095/201760992-b8b22c88-bf44-44ac-951b-3f94c613e65a.png)
+
 
 We used this split the first time around for our machine learning portion, before we remebered that our data might be imbalanced. So with the value count function, we checked how many of the rows were given the 1 for 'viral' and how many were given the 0 for 'not viral' and this is what was shown:
 
-resample_count
+![resample_count](https://user-images.githubusercontent.com/105755095/201761010-e71f228c-b248-4138-b58d-27355f0a7816.png)
 
-data_imbalanced_percent
+
+![data_imbalanced_percent](https://user-images.githubusercontent.com/105755095/201761029-76ad842d-1a50-4fb5-9831-8c185ea90ede.png)
+
 
 ![graph_target](https://user-images.githubusercontent.com/105755095/201201658-e2d6abe6-268e-4700-8c79-ae75cc993bef.png)
 
 Our data was very imbalanced and we needed to use a function that would balance this data. Our instructor suggested we use SMOTEENN as it does both undersampling and oversampling at the same time. After resampling our data, we rechecked the y values and the numbers we much more balanced than before. 
 
-resample_smoteenn
+![resample_smoteenn](https://user-images.githubusercontent.com/105755095/201761068-aa4281a3-d567-4938-ae70-e6debc919575.png)
+
 
 ### Model Choices 
 Our group choice 3 different machine learning models for our dataset. We started off with the most obvious choice for binary classification which was the Logistic Regression Model. It is an easy and simple model to use which will get the job done. However, this model is prone to overfitting on the training data which is something we kept in mind when navigating this model. 
@@ -139,7 +151,8 @@ Before better Feature Selection:
 
 After Feature Selection:
 
-LR_ClassReport
+![LR_ClassReport](https://user-images.githubusercontent.com/105755095/201761105-5b335728-ce77-4e9c-b683-cba9cf3ce9df.png)
+
 
 
 #### Random Forest Model
@@ -150,7 +163,8 @@ Before better Feature Selection:
 
 After Feature Selection:
 
-RF_ClassReport
+![RF_ClassReport](https://user-images.githubusercontent.com/105755095/201761127-209b39f1-2ff5-4e41-8fd5-009821c831aa.png)
+
 
 #### Easy Ensemble AdaBoost Model
 Before better Feature Selection:
@@ -160,16 +174,20 @@ Before better Feature Selection:
 
 After Feature Selection:
 
-EE_ClassReport
+![EE_ClassReport](https://user-images.githubusercontent.com/105755095/201761135-032164ca-f595-42d0-a878-ceb7e3c9aeb9.png)
+
 
 ### Trying for the Greatest Accuracy Score
 Since our RandomForest model gave us the best results, we tried a couple times to make changes to the amount of nodes and trees in order to give us a better accuracy score. However, it seems like our first attempt at the default setting was the best model we could use.
 
-attempt 2
+![RF_Attempt2](https://user-images.githubusercontent.com/105755095/201761181-80662750-96ef-4b00-8269-935e3707d38d.png)
 
-attempt 3
 
-attempt 4
+![RF_Attempt3](https://user-images.githubusercontent.com/105755095/201761186-1e94fbe9-7edf-46e9-9645-9e333ff95da9.png)
+
+
+![RF_Attempt4](https://user-images.githubusercontent.com/105755095/201761208-3ab42e68-6537-4fed-bebd-38e686d298d4.png)
+
 
 ### Accuracy, Precision, and Recall of our Models
 Below are the accuracy scores for all 3 models we used, along with the confusion matrix and classification report with an explanation of what these numbers mean;
@@ -177,46 +195,55 @@ Below are the accuracy scores for all 3 models we used, along with the confusion
 #### Logistic Regression
 The Accuracy Score of this model was fair. at 87.6%, it was able to categorize whether a video was going to reach that 1 million mark most of the time. 
 
-LR_Accuracy
+![LR_Accuracy](https://user-images.githubusercontent.com/105755095/201761260-95bdad6f-fea1-400c-bc52-0c90d520288a.png)
+
 
 We can see from the confusion matrix, that model confused 142 videos as viral when they were actually below the 1 million mark, these are the false positves. The model predicted 118 videos as not viral even though they actually did gain more than 1 million views, these are the false negatives. 
 
-LR_CM
+![LR_CM](https://user-images.githubusercontent.com/105755095/201761268-133c6983-daa4-47c5-9ac7-dde0cef9585b.png)
+
 
 The precision and recall for when the model was to predict a video under 1 million views was great. However, when it came to the precision and recall of the viral videos, it has a little more difficulty, as we saw from the confusion matrix. Precision scores share what percent of predictions were correct. So, looking at the classification report, only 68% of the true positives were labeled correctly. The other 32% of videos that were labeled as viral were actually not viral. This is a large chunk of videos falsely labeled.  Recall shares what percent of viral videos did the model catch. From this model as we can see below, logistic regression model was able to correctly identify 72% of the viral instances as viral and labeled the rest as not viral, even though they were. 
 
-LR_ClassReport
+![LR_ClassReport](https://user-images.githubusercontent.com/105755095/201761277-16fef56f-1e85-460e-8204-0de4bb92f453.png)
+
 
 #### Random Forest Model
 This model had the best accuracy score at 93.9%. This model was the best at predicting which video goes in the viral vs non-viral category. 
 
-RF_Accuracy
+![RF_Accuracy](https://user-images.githubusercontent.com/105755095/201761318-796dfac7-70fa-4b1f-bb68-f624819eadd2.png)
+
 
 We can see from this model's confusion matrix that 107 videos that were labeled as viral were actually below the 1 million views mark, the false positives. Furthermore, only 24 videos that were actually above the 1 million mark were labeled as not viral. This is the false negatives number.
 
-RF_CM
+![RF_CM](https://user-images.githubusercontent.com/105755095/201761335-702df89f-361c-4dc8-8b9c-13498923eead.png)
+
 
 The recall for this model was much better than the last. 94% of videos that were viral were labeled correctly as viral. The precision is still a little low, however, it is the best of what all 3 models could do. The models are all having alittle trouble labeling a video as viral, when infact it did not actually gain over 1 million views. 
 
-RF_ClassReport
+![RF_ClassReport](https://user-images.githubusercontent.com/105755095/201761347-c1c65d45-aa77-4d9f-ade8-a0d9ad2c1092.png)
+
 
 #### Easy Ensemble AdaBoost Model
 For our last model, the accuracy score was at 90.9%, which is not bad at all but definently not the best. 
 
-EE_Accuracy
+![EE_Accuracy](https://user-images.githubusercontent.com/105755095/201761385-2d02f6cc-b387-4a41-be6a-930c58a1ef8d.png)
+
 
 This confusion matrix showed that 146 videos that were not viral were labeled as viral and those are the false positives. Only 39 videos that were actually viral were labeled as not viral, which is not too bad. These are the false negatives. 
 
-EE_CM
+![EE_CM](https://user-images.githubusercontent.com/105755095/201761396-1be0090e-209c-456b-b73f-eb2239ba5d38.png)
+
 
 From the Classification Report, we can see that the recall ability was pretty high. For the recall score of the 1 label, the videos that were actually viral and labeled as not viral were not too many. However, the precision of this model for the viral videos was still pretty low as seen with the other 2 models. 72% of videos that were labeled as viral were correctly labeled, however, the other 28% of videos that were labeled as viral but were not actually above the 1 million view mark. 
 
-EE_ClassReport
+![EE_ClassReport](https://user-images.githubusercontent.com/105755095/201761404-b308e227-fa11-4a86-bb14-cd80543862e1.png)
+
 
 ### Results from our Machine Learning Model
 The RandomForest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 93%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
 
-features graph
+![features_graph](https://user-images.githubusercontent.com/105755095/201761450-4717fe61-44a9-49a0-80eb-514fc0d0e5ca.png)
 
 
 ## Database Integration
