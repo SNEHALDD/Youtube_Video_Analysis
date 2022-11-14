@@ -5,6 +5,7 @@ from dash import Input, Output, dcc, html
 from create_charts import fig, fig2, fig4, fig5, fig6, fig8, fig9, template
 from data_loader import (mega_df2, mega_df3, category_data_new, channel_data,
                          video_sentiment_data)
+import numpy as np
 
 app = dash.Dash(external_stylesheets=[
                 dbc.themes.DARKLY], suppress_callback_exceptions=True)
@@ -318,11 +319,11 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
 # Machine Learning
     elif pathname == "/page-4":
         return html.Div([html.H3(children='Machine Learning Analysis'),
-                         html.Hr(),
-                         # Container for fourth section
-                         dbc.Row(children=[
-                             # Container for left side of fourth section
-                             dcc.Markdown('''
+                        html.Hr(),
+                        # Container for fourth section
+                        dbc.Row(children=[
+                            # Container for left side of fourth section
+                            dcc.Markdown('''
 # Machine Learning Model
 We are using machine learning to see if we can predict whether or not a YouTube video can reach 1 million views based on its subscriber count, channel view count, channel video count, amount of comments on the video, amount of likes on the video, the topic of the video, and the day of week the video was published. We are using 1 million as our numeric value of whether the video has the potential to be 'viral' or not. Below is the code we used to add the viral or not column from our dataset we created using Youtube's API.
 
@@ -454,50 +455,49 @@ After Resample:
 # Top Channels
     elif pathname == "/page-5":
         return html.Div([html.H3(children='Top Channel Metrics'),
-                         html.Hr(),
-                         # Container for first section
-                         dbc.Row(children=[
-                             # Container for left side of first section
-                             dbc.Col(width='auto', children=[
-                                 # Label for selections
-                                 html.H5('Select metric to view:'),
-                                 # Selections
-                                 dcc.RadioItems(
-                                     id='yaxis', options=[
-                                         {'label': ' Views',
+                        html.Hr(),
+                        # Container for first section
+                        dbc.Row(children=[
+                            # Container for left side of first section
+                            dbc.Col(width='auto', children=[
+                                # Label for selections
+                                html.H5('Select metric to view:'),
+                                # Selections
+                                dcc.RadioItems(
+                                    id='yaxis', options=[
+                                        {'label': ' Views',
                                           'value': 'view_count'},
-                                         {'label': ' Subscribers',
+                                        {'label': ' Subscribers',
                                           'value': 'subscriber_count'},
-                                         {'label': ' Comments',
+                                        {'label': ' Comments',
                                              'value': 'comment_count'},
 
-                                     ],
-                                     value='view_count',
-                                     labelStyle={'display': 'block'}
-                                 ),
-                                 html.Hr(),
-                                 html.H5('Select:'),
-                                 dcc.RadioItems(
-                                     id='tot-mean', options=[
-                                         {'label': ' Average',
+                                    ],
+                                    value='view_count',
+                                    labelStyle={'display': 'block'}
+                                ),
+                                html.Hr(),
+                                html.H5('Select:'),
+                                dcc.RadioItems(
+                                    id='tot-mean', options=[
+                                        {'label': ' Average',
                                           'value': 'mean'},
-                                         {'label': ' Total',
+                                        {'label': ' Total',
                                           'value': 'sum'},
-                                     ],
-                                     value='mean',
-                                     labelStyle={'display': 'block'}
-                                 ),
-
-                             ]),
-                             # Container for right side of first section
-                             dbc.Col(width='auto', children=[
-                                 # Graph
-                                 dcc.Graph(
-                                     id='top-channels',
-                                     figure=fig6
-                                 ),
-                                 html.P(
-                                     'Analysis commentary: Video Count is disabled due to bug')
+                                    ],
+                                    value='mean',
+                                    labelStyle={'display': 'block'}
+                                ),
+                            ]),
+                            # Container for right side of first section
+                            dbc.Col(width='auto', children=[
+                                # Graph
+                                dcc.Graph(
+                                    id='top-channels',
+                                    figure=fig6
+                                ),
+                                html.P(
+                                    'Analysis commentary: Video Count is disabled due to bug')
                              ]),
                          ]),
                          ]
@@ -507,99 +507,106 @@ After Resample:
     elif pathname == "/page-6":
         # imbed tableau dashboard
         return html.Div([html.H3(children='Tableau Dashboard'),
-                         html.Hr(),
-                         # add link to visit tableau dashboard
-                         dbc.Row(children=[
-
-                             html.A('Click here to view in Tableau Public',
+                        html.Hr(),
+                        # add link to visit tableau dashboard
+                        dbc.Row(children=[
+                            html.A('Click here to view in Tableau Public',
                                     href='https://public.tableau.com/app/profile/snehal.desavale/viz/YoutubeVideoAnalysis_16680643134020/Dashboard', target='_blank'),
 
-                         ]),
-                         # display tableau.html
-                         html.Iframe(srcDoc=open(
-                             'tableau.html', 'r').read(), width='100%', height='1000')
-                         ])
+                        ]),
+                        # display tableau.html
+                        html.Iframe(srcDoc=open(
+                            'tableau.html', 'r').read(), width='100%', height='1000')
+                        ])
 # ------------------------------------------------------------
 # ML Viz
     elif pathname == "/page-7":
         return html.Div([html.Div(className='top-container', children=[html.H3(children='Machine Learning Visualization')]),
-                         html.Hr(),
-                         # Container for first section
-                         dbc.Row(children=[
-                             html.H5('Select features:'),
-                             # Container for left side of first section
-                             dbc.Col(width='auto', children=[
-                                 # Label for selections
-                                 html.P('Feature 1 (X):'),
-                                 # Selections
-                                 dcc.RadioItems(
-                                     id='ml-feature-1', options=ml_viz_options_num,
-                                     value='view_count',
-                                     labelStyle={'display': 'block'}
-                                 ),
-                                 html.Hr(),
-                                 html.P('Feature 2 (Y):'),
-                                 dcc.RadioItems(
-                                     id='ml-feature-2', options=ml_viz_options_num,
-                                     value='video_length_seconds',
-                                     labelStyle={'display': 'block'}
-                                 ),
-                                 html.Hr(),
-                                 html.P('Feature 3 (Z):'),
-                                 dcc.RadioItems(
-                                     id='ml-feature-3', options=ml_viz_options_num,
-                                     value='comment_count',
-                                     labelStyle={'display': 'block'}
-                                 ),
+                        html.Hr(),
+                        # Container for first section
+                        dbc.Row(children=[
+                            html.H5('Select features:'),
+                            # Container for left side of first section
+                            dbc.Col(width='auto', children=[
+                                # Label for selections
+                                html.P('Feature 1 (X):'),
+                                # Selections
+                                dcc.RadioItems(
+                                    id='ml-feature-1', options=ml_viz_options_num,
+                                    value='view_count',
+                                    labelStyle={'display': 'block'}
+                                ),
+                                html.Hr(),
+                                html.P('Feature 2 (Y):'),
+                                dcc.RadioItems(
+                                    id='ml-feature-2', options=ml_viz_options_num,
+                                    value='video_length_seconds',
+                                    labelStyle={'display': 'block'}
+                                ),
+                                html.Hr(),
+                                html.P('Feature 3 (Z):'),
+                                dcc.RadioItems(
+                                    id='ml-feature-3', options=ml_viz_options_num,
+                                    value='comment_count',
+                                    labelStyle={'display': 'block'}
+                                ),
 
-                             ]),
-                             dbc.Col(width=2, children=[
-                                 html.P('Feature 4 (Color):'),
-                                 dcc.RadioItems(
-                                     id='ml-feature-4', options=ml_viz_options_color,
-                                     value='topic_category',
-                                     labelStyle={'display': 'block'}
-                                 ),
-                                 html.Hr(),
-                                 html.P('Feature 5 (Shape):'),
-                                 dcc.RadioItems(
-                                     id='ml-feature-5', options=ml_viz_options_symbol,
-                                     value='day_of_week_published',
-                                     labelStyle={'display': 'block'}
-                                 ),
-                                 html.Hr(),
-                                 html.H5('Filter by:'),
-                                 html.P('Video Length (seconds):'),
-                                 dcc.RangeSlider(
-                                     id='ml-video-length',
-                                     min=0,
-                                     max=4.633,
-                                     step=.001,
-                                     value=[0, 4.633],
-                                     marks={
+                            ]),
+                            dbc.Col(width=2, children=[
+                                html.P('Feature 4 (Color):'),
+                                dcc.RadioItems(
+                                    id='ml-feature-4', options=ml_viz_options_color,
+                                    value='topic_category',
+                                    labelStyle={'display': 'block'}
+                                ),
+                                html.Hr(),
+                                html.P('Feature 5 (Shape):'),
+                                dcc.RadioItems(
+                                    id='ml-feature-5', options=ml_viz_options_symbol,
+                                    value='day_of_week_published',
+                                    labelStyle={'display': 'block'}
+                                ),
+                                html.Hr(),
+                                html.H5('Filter by:'),
+                                html.P('Video Length (seconds):'),
+                                dcc.RangeSlider(
+                                    id='ml-video-length',
+                                    min=0,
+                                    max=4.633,
+                                    step=.001,
+                                    value=[0, 4.633],
+                                    marks={
                                         0: '0',
                                         4.633*.25: '15s',
                                         4.633*.5: '200s',
                                         4.633*.75: '3000s',
                                         4.633: 'Max'},
-                                 ),
-                                 html.Hr(),
+                                ),
+                                html.Hr(),
 
-                                 html.P('Video Views:'),
-                                 dcc.RangeSlider(
-                                     id='ml-video-views',
-                                     min=0,
-                                     max=9.317,
-                                     step=.001,
-                                     value=[0, 9.317],
-                                     marks={
+                                html.P('Video Views:'),
+                                dcc.RangeSlider(
+                                    id='ml-video-views',
+                                    min=0,
+                                    max=9.317,
+                                    step=.001,
+                                    value=[0, 9.317],
+                                    marks={
                                         0: '0',
                                         9.317*.25: '200',
                                         9.317*.5: '50k',
                                         9.317*.75: '10M',
                                         9.317: 'Max'}
-                                 ),
-                                 html.Hr(),
+                                ),
+                                html.Hr(),
+                                html.P('Search for a channel:'),
+                                dcc.Input(
+                                    id='ml-channel-search',
+                                    type='text',
+                                    placeholder='Enter channel name',
+                                    debounce=True
+                                ),
+                                
 
                              ]),
                              # Container for right side of first section
@@ -609,9 +616,8 @@ After Resample:
                                  dcc.Graph(
                                      id='ml-viz',
                                      figure=fig8,
-                                     loading_state={'is_loading': True}
-
                                  ),
+                                 html.P('Note: Videos with a comment count of 0 have been converted to 1 to avoid known plotly bug', style={'font-size': '14px', 'color': 'grey'})
                              ]),
                          ]),
                          ]
@@ -703,36 +709,45 @@ def update_graph(yaxis, totmean):
         Input('ml-feature-5', 'value'),
         Input('ml-video-length', 'value'),
         Input('ml-video-views', 'value'),
+        Input('ml-channel-search', 'value'),
     ],)
-def update_graph(feature1, feature2, feature3, feature4, feature5, length, views):
+def update_graph(feature1, feature2, feature3, feature4, feature5, length, views, channel):
+    filtered_df = mega_df2.drop(columns=['channel_id_x', 'published_at', 'video_length', 'subscribers_binned', 'video_count_binned', 'like_count_binned', 'comment_binned', 'channel_views_binned', 'channel_id_y'])
+    filtered_df['comment_count'] = filtered_df['comment_count'].replace(0, 1)
+    # replace sentiment values of NaN with 0
+    filtered_df['sentiment'] = filtered_df['sentiment'].fillna(0)
+    filtered_df.dropna(inplace=True)
+    if channel:
+        filtered_df = filtered_df[filtered_df.custom_url.str.contains(channel)]
     if feature5 == 'none':
         if feature4 == 'none':
-            fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+            fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                                 x=feature1, y=feature2, z=feature3, height=800, width=1024, log_x=True, log_y=True, log_z=True,
                                 labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                 'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                                 hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
         else:
-            fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+            fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                                 x=feature1, y=feature2, z=feature3, color=feature4, height=800, width=1024, log_x=True, log_y=True, log_z=True,
                                 labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                 'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                                 hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
     elif feature4 == 'none':
-        fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+        fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                             x=feature1, y=feature2, z=feature3, symbol=feature5, height=800, width=1024, log_x=True, log_y=True, log_z=True,
                             labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
     else:
-        fig = px.scatter_3d(mega_df2[(mega_df2['video_length_seconds'] >= transform_value(length[0])) & (mega_df2['video_length_seconds'] <= transform_value(length[1])) & (mega_df2['view_count'] >= transform_value(views[0])) & (mega_df2['view_count'] <= transform_value(views[1]))], template=template,
+        fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                             x=feature1, y=feature2, z=feature3, color=feature4, symbol=feature5, height=800, width=1024, log_x=True, log_y=True, log_z=True,
                             labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
 
-    fig.update_traces(marker=dict(size=3, line=dict(width=1, color='DarkSlateGrey')),
-                      selector=dict(mode='markers'))
+    fig.update_traces(marker=dict(size=3, line=dict(width=1, color='White')), selector=dict(mode='markers'))
+
+
     # if feature1 is Sentiment Score, change log_x to False
     if feature1 == 'sentiment':
         fig.update_layout(scene=dict(xaxis=dict(type='linear')))
@@ -746,12 +761,12 @@ def update_graph(feature1, feature2, feature3, feature4, feature5, length, views
         margin=dict(l=0, r=0, b=0, t=0),
         paper_bgcolor="Black"
     )
-    # increase legend symbol size
-    fig.update_layout(legend=dict(
-        font=dict(
-            size=12,
-        )
-    ))
+    # edit color scale for log scale
+    fig.update_traces(marker=dict(colorscale='Viridis'))
+
+
+
+
 
     return fig
 
