@@ -243,7 +243,6 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
                                      id='bar-chart',
                                      figure=fig
                                  ),
-                                 html.P('Analysis commentary:'),
                              ]),
                          ]),
                          ]
@@ -693,11 +692,7 @@ The RandomForest model did the best job in training and learning which features 
         return html.Div([html.H3(children='Video Length Analysis'),
                          html.Hr(),
                          dbc.Row(children=[
-                             dbc.Col(width='auto', children=[
-                                 html.H5('Select features to view:'),
-                                 html.Hr(),
-                                 html.P('Feature 1 (X):'),
-                             ]),
+                    
                              dbc.Col(width='auto', children=[
                                  dcc.Graph(
                                      id='video-length-viz',
