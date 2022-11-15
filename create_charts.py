@@ -10,7 +10,7 @@ fig.update_traces(marker_color='red')
 
 # Sentiment Analysis
 fig2 = px.box(video_sentiment_data, x="topic_category", y="sentiment", template=template, labels={'topic_category':'Category', 'sentiment':'Sentiment Score'},
-              title='Analysis by Category', height=600, width=1200)
+              title='Analysis by Category', height=500, width=1000)
 fig2.update_traces(marker_color='red')
 
 # Day of Week
@@ -36,11 +36,12 @@ fig6.update_layout(yaxis_categoryorder='total ascending')
 
 fig7 = px.scatter_3d(binned_data, x='view_count', y='like_count', z='comment_count', color='video_views_binned', template=template, height=800, width=1600,hover_name="custom_url" )
 
-fig8 = px.scatter_3d(mega_df2, template=template, 
-                        x='view_count', y='video_length_seconds', z='comment_count', color='topic_category', symbol='day_of_week_published', height=600, width=1000, log_x=True, log_y=True, log_z=True, 
-                        labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
-                               'topic_category': 'Category', 'channel_title': 'Channel'},
-                        hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+fig8 = px.scatter_3d(mega_df2, template=template,
+                            x='view_count', y='video_length_seconds', z='comment_count', color='topic_category' ,symbol='day_of_week_published', height=800, width=1000, log_x=True, log_y=True, log_z=True,
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                    'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                            hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
+
 fig8.update_layout(
     margin=dict(l=0,r=0,b=0,t=0),
     paper_bgcolor="Black"
