@@ -514,9 +514,6 @@ After Resample:
                                     href='https://public.tableau.com/app/profile/snehal.desavale/viz/YoutubeVideoAnalysis_16680643134020/Dashboard', target='_blank'),
 
                         ]),
-                        # display tableau.html
-                        html.Iframe(srcDoc=open(
-                            'tableau.html', 'r').read(), width='100%', height='1000')
                         ])
 # ------------------------------------------------------------
 # ML Viz
