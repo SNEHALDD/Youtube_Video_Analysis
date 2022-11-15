@@ -14,9 +14,6 @@ joined_data = pd.read_sql_query('select * from joined_data',con=conn)
 binned_data = pd.read_sql_query('select * from clean_binned_data',con=conn)
 mega_df = pd.read_sql_query('select * from new_binned_df',con=conn)
 
-
-
-
 category_data = channel_data.groupby('topic_category').sum().reset_index()
 sentiment_data = pd.read_csv('Database/ready_for_sql/sentiment_data.csv')
 new_length = pd.read_csv('Database/ready_for_sql/video_data_fixed_length.csv')
