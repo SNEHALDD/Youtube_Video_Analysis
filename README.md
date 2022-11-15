@@ -17,6 +17,9 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
 
 4. Snehal Desavale - SNEHALDD - Square Role
 
+## Presentation 
+[Link to Google slides presentation](https://docs.google.com/presentation/d/1Bu-T2ZBeTqTyPBRMq8CEh9HJIoqKXN8aQOd7c9k1PV0/edit?usp=sharing)
+
 ## Resources
 
 1. Youtube v3 API (https://www.googleapis.com/youtube/v3)
@@ -59,8 +62,6 @@ You have PostgresSQL 11 installed.
 You have created a database in AWS. 
 
 You have access to Tableau public. 
-
-## Installation
 
 ## Machine Learning Model
 We are using machine learning to see if we can predict whether or not a YouTube video can reach 1 million views based on its subscriber count, channel video count, the topic of the video, the length of the video, and the day of week the video was published. We are using 1 million as our numeric value of whether the video has the potential to be 'viral' or not. Below is the code we used to add the viral or not column from our dataset we created using Youtube's API. 
@@ -276,6 +277,9 @@ We will add visualizations of:
 
 Interactive element(s):
 - Dropdown menu which will list names of all the categories. Once you choose the category, dashboard will show above charts and information of videos.
+- Animation which shows which category was most viewed in the particular year.
+
+[Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ## Contact 
 If you want to contact us, you can reach us at
