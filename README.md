@@ -63,8 +63,6 @@ You have created a database in AWS.
 
 You have access to Tableau public. 
 
-## Installation
-
 ## Machine Learning Model
 We are using machine learning to see if we can predict whether or not a YouTube video can reach 1 million views based on its subscriber count, channel video count, the topic of the video, the length of the video, and the day of week the video was published. We are using 1 million as our numeric value of whether the video has the potential to be 'viral' or not. Below is the code we used to add the viral or not column from our dataset we created using Youtube's API. 
 
