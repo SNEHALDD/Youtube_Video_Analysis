@@ -243,7 +243,6 @@ We chose 1 million views as our differentiating point of viral vs. not viral. Du
                                      id='bar-chart',
                                      figure=fig
                                  ),
-                                 html.P('Analysis commentary:'),
                              ]),
                          ]),
                          ]
@@ -631,7 +630,7 @@ The RandomForest model did the best job in training and learning which features 
                                 html.P('Feature 5 (Shape):'),
                                 dcc.RadioItems(
                                     id='ml-feature-5', options=ml_viz_options_symbol,
-                                    value='day_of_week_published',
+                                    value='video_views_binned',
                                     labelStyle={'display': 'block'}
                                 ),
                                 html.Hr(),
@@ -693,11 +692,7 @@ The RandomForest model did the best job in training and learning which features 
         return html.Div([html.H3(children='Video Length Analysis'),
                          html.Hr(),
                          dbc.Row(children=[
-                             dbc.Col(width='auto', children=[
-                                 html.H5('Select features to view:'),
-                                 html.Hr(),
-                                 html.P('Feature 1 (X):'),
-                             ]),
+                    
                              dbc.Col(width='auto', children=[
                                  dcc.Graph(
                                      id='video-length-viz',
@@ -802,12 +797,15 @@ def update_graph(feature1, feature2, feature3, feature4, feature5, length, views
     else:
         fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                             x=feature1, y=feature2, z=feature3, color=feature4, color_continuous_scale=[(0, "red"),(.5, "yellow"), (1, "green")],symbol=feature5, height=800, width=1000, log_x=logscale, log_y=logscale, log_z=logscale,
+                            symbol_sequence=['circle','diamond', 'square', 'x'],
                             labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
 
-    fig.update_traces(marker=dict(size=3, line=dict(width=1)), selector=dict(mode='markers'))
-
+    fig.update_traces(marker=dict(size=3, line=dict(width=.5)), selector=dict(mode='markers'))
+    # update the symbol for 10,000 views
+    # get an array of symbol types
+    symbols = fig.data[0].marker.symbol
     # if feature1 is Sentiment Score, change log_x to False
     if feature1 == 'sentiment':
         fig.update_layout(scene=dict(xaxis=dict(type='linear')))
