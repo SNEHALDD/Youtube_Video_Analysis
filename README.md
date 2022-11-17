@@ -266,20 +266,34 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
 
 ## Dashboard
 
-### Tool : Tableau Public
+### Tools : 
+1) Git Dash
+- Following Visuaizations and graphs have been added:
+  - Channel Category Metrics,
+  - Top Channels,
+  - Video Length Metrics,
+  - Comment Sentiment Analysis,
+  - Video Publishing Metrics,
+  - Machine Leaning Visualization.
 
-We will add visualizations of:
-- Total number of subscribers of the channel,
-- Total number of views on the video,
-- Total number of likes on the video.
-- Total length of the video.
-- Ratio of number of subscribers to number of views.
+#### Interactive element(s):
+- Created multiple metrics such as View Count, Subscriber Count, Comment Count,
+- Option for Category selection as per the requirement.
 
-Interactive element(s):
-- Dropdown menu which will list names of all the categories. Once you choose the category, dashboard will show above charts and information of videos.
-- Animation which shows which category was most viewed in the particular year.
+[Link to Dashboard](http://kwmdata.pythonanywhere.com/page-1) 
 
-[Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
+2) Tableau Public
+- Following Visuaizations and graphs have been added:
+  - Total number of Subscribers, Views, Likes, Comments of each Category,
+  - Total number of Subscribers, Views, Likes, Comments of the Channel,
+  - Total number of Views according to Video Length,
+  - Popular Categories on the basis of Like Count.
+
+#### Interactive element(s):
+- Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
+- Animation which shows which category was most viewed in particular year.
+
+[Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Test_Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ## Contact 
 If you want to contact us, you can reach us at
