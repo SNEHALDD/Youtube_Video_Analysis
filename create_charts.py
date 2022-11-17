@@ -15,7 +15,7 @@ fig2.update_traces(marker_color='red')
 #px.defaults.color_continuous_scale = px.colors.sequential.thermal
 # Day of Week
 fig4 = px.histogram(binned_data, x="day_of_week_published",template=template, 
-                    title='Published Date', height=400, width=500, color='video_views_binned',
+                    title='Published Date', height=500, width=500, color='video_views_binned',
                     category_orders={'video_views_binned': [
                         'less than 100 views', 'less than 1000 views', '1,000-10,000 views', '10,000-50,000 views', '50,000-500,000', '500,000- 1 million views', 'over 1 million views', 'over 5 million views', 'over 1 billion views']},
                     color_discrete_sequence=px.colors.sequential.thermal,
@@ -25,7 +25,7 @@ fig4.update_xaxes(categoryorder="array", categoryarray=[
 
 # Time of Day
 fig5 = px.histogram(binned_data, x=binned_data['published_at'].dt.hour,template=template, 
-                    title='Time of Day Published', height=400, width=600, color='video_views_binned', 
+                    title='Time of Day Published', height=500, width=600, color='video_views_binned', 
                     category_orders={'video_views_binned': [
                         'less than 100 views', 'less than 1000 views', '1,000-10,000 views', '10,000-50,000 views', '50,000-500,000', '500,000- 1 million views', 'over 1 million views', 'over 5 million views', 'over 1 billion views']},
                     color_discrete_sequence=px.colors.sequential.thermal,
