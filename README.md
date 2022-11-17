@@ -2,6 +2,12 @@
 
 ![Yt](https://user-images.githubusercontent.com/106944351/201234042-db372118-b1d8-4b86-9ba5-79c52e7a63eb.jpeg)
 
+## About 
+
+Final group project of the UT Data Analytics Bootcamp. 
+
+The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
+
 ## Overview
 
 Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 1 million views. If the video can get over 1 million views than it will be given the value of 1 which equates to viral. If the video would get less than 1 million views then it would be given the value of 0, for not viral.
@@ -240,9 +246,20 @@ From the Classification Report, we can see that the recall ability was pretty hi
 
 ![EE_ClassReport](https://user-images.githubusercontent.com/105755095/201761404-b308e227-fa11-4a86-bb14-cd80543862e1.png)
 
+### Changes Made for a More Accurate Machine Learning Model
+Because our model could not get over a 93% accuracy score and 78% precision score, I decided to resample our data again. This time, I used SMOTE. This is an oversampling technique which generates synthetic samples for our minority class, the 1’s. Below is the snippet of the code we used to resample our data again. 
+
+![smote_code](https://user-images.githubusercontent.com/105755095/202559334-b03555e5-5718-45da-81e7-64c6baac4bae.png)
+
+Since our Random Forest Classifier was the best of all three models, we decided to only test this resampled data on this classifier. And with great results, we achieved a 99% accuracy score and almost perfect scores for the recall and precision. This is clearly our best fit for machine learning. 
+
+![smote_accuracy](https://user-images.githubusercontent.com/105755095/202559666-a18f33c9-1f60-41e2-9463-77dd7b6af729.png)
+
+![smote_classreport](https://user-images.githubusercontent.com/105755095/202559679-d48efbd5-a8e2-46ed-9810-027f84826060.png)
+
 
 ### Results from our Machine Learning Model
-The RandomForest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 93%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
+The new Random Forest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 99%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
 
 ![features_graph](https://user-images.githubusercontent.com/105755095/201761450-4717fe61-44a9-49a0-80eb-514fc0d0e5ca.png)
 
@@ -257,29 +274,55 @@ We created a database in [Amazon Web Services](https://aws.amazon.com/) and conn
 This [joined file](https://raw.githubusercontent.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/main/Database/ready_for_sql/joined_data.csv) stores all the information we will need in order to begin to train our machine learning model and create the best visualizations possible. 
 
 ### ERD
-Here is the [ERD](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/blob/main/Database/ERD.png) visual which makes the connection of both tables that we joined together to create our final dataframe.
+Here is the [ERD](https://github.com/SNEHALDD/Youtube_Video_Analysis/blob/main/Resources/ERD.png) visual which makes the connection of both tables that we joined together to create our final dataframe.
 
 ![ERD](https://user-images.githubusercontent.com/105755095/199872407-748a5c31-53f4-4fd2-8765-d25994003606.png)
 
 ### Connecting to the database
-As shown in this [file](https://github.com/SNEHALDD/Top_Youtube_Channels_Trend_Analysis/blob/Zara/Database/db_connection.ipynb), we will be using psycopg to connect our database that is currently stored in the cloud, to our python file in order to do our machine learning model. 
+As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video_Analysis/main/data_loader.py), we will be using psycopg to connect our database that is currently stored in the cloud, to our python file in order to do our machine learning model. 
 
 ## Dashboard
 
-### Tool : Tableau Public
+### Tools : 
+1) Git Dash
+ - Following Visuaizations and graphs have been added:
+   - Channel Category Metrics,
+   - Top Channels,
+   - Video Length Metrics,
+   - Comment Sentiment Analysis,
+   - Video Publishing Metrics,
+   - Machine Leaning Visualization.
+   
+ The following graph shows Corelation between View, Subscriber, Video Count and Average Video Length of each Category:
+ ![image](https://user-images.githubusercontent.com/106944351/202556935-50fc4805-bf1e-432f-99d5-8456f52a09d6.png)
 
-We will add visualizations of:
-- Total number of subscribers of the channel,
-- Total number of views on the video,
-- Total number of likes on the video.
-- Total length of the video.
-- Ratio of number of subscribers to number of views.
+The following graph shows Video Length Analysis:
+![image](https://user-images.githubusercontent.com/106944351/202557047-7e023672-4802-43cd-828b-8fe20ce3243d.png)
 
-Interactive element(s):
-- Dropdown menu which will list names of all the categories. Once you choose the category, dashboard will show above charts and information of videos.
-- Animation which shows which category was most viewed in the particular year.
 
-[Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
+- Interactive element(s):
+  - Created multiple metrics such as View Count, Subscriber Count, Comment Count,
+  - Option for Category selection as per the requirement.
+
+ [Link to Dashboard](http://kwmdata.pythonanywhere.com/page-1) 
+
+2) Tableau Public
+ - Following Visuaizations and graphs have been added:
+   - Total number of Subscribers, Views, Likes, Comments of each Category,
+   - Total number of Subscribers, Views, Likes, Comments of the Channel,
+   - Total number of Views according to Video Length,
+   - Popular Categories on the basis of Like Count.
+
+- Interactive element(s):
+  - Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
+  - Animation which shows which category was most viewed in particular year.
+
+Picture of Tableau Dashboard:
+![image](https://user-images.githubusercontent.com/106944351/202557307-94b29191-440b-44e4-b0ed-a716b09d5ac4.png)
+
+
+
+ [Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Test_Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ## Contact 
 If you want to contact us, you can reach us at
