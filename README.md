@@ -268,32 +268,32 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
 
 ### Tools : 
 1) Git Dash
-- Following Visuaizations and graphs have been added:
-  - Channel Category Metrics,
-  - Top Channels,
-  - Video Length Metrics,
-  - Comment Sentiment Analysis,
-  - Video Publishing Metrics,
-  - Machine Leaning Visualization.
+ - Following Visuaizations and graphs have been added:
+   - Channel Category Metrics,
+   - Top Channels,
+   - Video Length Metrics,
+   - Comment Sentiment Analysis,
+   - Video Publishing Metrics,
+   - Machine Leaning Visualization.
 
-#### Interactive element(s):
-- Created multiple metrics such as View Count, Subscriber Count, Comment Count,
-- Option for Category selection as per the requirement.
+- Interactive element(s):
+  - Created multiple metrics such as View Count, Subscriber Count, Comment Count,
+  - Option for Category selection as per the requirement.
 
-[Link to Dashboard](http://kwmdata.pythonanywhere.com/page-1) 
+ [Link to Dashboard](http://kwmdata.pythonanywhere.com/page-1) 
 
 2) Tableau Public
-- Following Visuaizations and graphs have been added:
-  - Total number of Subscribers, Views, Likes, Comments of each Category,
-  - Total number of Subscribers, Views, Likes, Comments of the Channel,
-  - Total number of Views according to Video Length,
-  - Popular Categories on the basis of Like Count.
+ - Following Visuaizations and graphs have been added:
+   - Total number of Subscribers, Views, Likes, Comments of each Category,
+   - Total number of Subscribers, Views, Likes, Comments of the Channel,
+   - Total number of Views according to Video Length,
+   - Popular Categories on the basis of Like Count.
 
-#### Interactive element(s):
-- Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
-- Animation which shows which category was most viewed in particular year.
+- Interactive element(s):
+  - Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
+  - Animation which shows which category was most viewed in particular year.
 
-[Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Test_Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
+ [Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Test_Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ## Contact 
 If you want to contact us, you can reach us at
