@@ -2,6 +2,10 @@
 
 ![Yt](https://user-images.githubusercontent.com/106944351/201234042-db372118-b1d8-4b86-9ba5-79c52e7a63eb.jpeg)
 
+## About 
+
+Final group project of the UT Data Analytics Bootcamp. The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
+
 ## Overview
 
 Our goal is to create a machine learning model that will be trained to predict whether or not a youtube video has the potential to be viral. This will be based on features which include amount of subscribers that channel has, total amount of views on the channel and video, which category the video belongs to, and total amount of likes on the video. From these features, we will have over 7,000 videos to train and test this algorithm on so the model can learn which features best predict if the video will be viral. We are basing the term viral as a video that gets over 1 million views. If the video can get over 1 million views than it will be given the value of 1 which equates to viral. If the video would get less than 1 million views then it would be given the value of 0, for not viral.
@@ -275,6 +279,13 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
    - Comment Sentiment Analysis,
    - Video Publishing Metrics,
    - Machine Leaning Visualization.
+   
+ The following graph shows Corelation between View, Subscriber, Video Count and Average Video Length of each Category:
+ ![image](https://user-images.githubusercontent.com/106944351/202556935-50fc4805-bf1e-432f-99d5-8456f52a09d6.png)
+
+The following graph shows Video Length Analysis:
+![image](https://user-images.githubusercontent.com/106944351/202557047-7e023672-4802-43cd-828b-8fe20ce3243d.png)
+
 
 - Interactive element(s):
   - Created multiple metrics such as View Count, Subscriber Count, Comment Count,
@@ -292,6 +303,11 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
 - Interactive element(s):
   - Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
   - Animation which shows which category was most viewed in particular year.
+
+Picture of Tableau Dashboard:
+![image](https://user-images.githubusercontent.com/106944351/202557307-94b29191-440b-44e4-b0ed-a716b09d5ac4.png)
+
+
 
  [Link to Tableau Dashboard](https://public.tableau.com/views/YoutubeVideoAnalysis_16680643134020/Test_Dashboard?:language=en-US&:display_count=n&:origin=viz_share_link)
 
