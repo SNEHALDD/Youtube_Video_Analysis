@@ -4,7 +4,9 @@
 
 ## About 
 
-Final group project of the UT Data Analytics Bootcamp. The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
+Final group project of the UT Data Analytics Bootcamp. 
+
+The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
 
 ## Overview
 
@@ -244,9 +246,20 @@ From the Classification Report, we can see that the recall ability was pretty hi
 
 ![EE_ClassReport](https://user-images.githubusercontent.com/105755095/201761404-b308e227-fa11-4a86-bb14-cd80543862e1.png)
 
+### Changes Made for a More Accurate Machine Learning Model
+Because our model could not get over a 93% accuracy score and 78% precision score, I decided to resample our data again. This time, I used SMOTE. This is an oversampling technique which generates synthetic samples for our minority class, the 1’s. Below is the snippet of the code we used to resample our data again. 
+
+![smote_code](https://user-images.githubusercontent.com/105755095/202559334-b03555e5-5718-45da-81e7-64c6baac4bae.png)
+
+Since our Random Forest Classifier was the best of all three models, we decided to only test this resampled data on this classifier. And with great results, we achieved a 99% accuracy score and almost perfect scores for the recall and precision. This is clearly our best fit for machine learning. 
+
+![smote_accuracy](https://user-images.githubusercontent.com/105755095/202559666-a18f33c9-1f60-41e2-9463-77dd7b6af729.png)
+
+![smote_classreport](https://user-images.githubusercontent.com/105755095/202559679-d48efbd5-a8e2-46ed-9810-027f84826060.png)
+
 
 ### Results from our Machine Learning Model
-The RandomForest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 93%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
+The new Random Forest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 99%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
 
 ![features_graph](https://user-images.githubusercontent.com/105755095/201761450-4717fe61-44a9-49a0-80eb-514fc0d0e5ca.png)
 
