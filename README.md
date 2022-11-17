@@ -259,7 +259,7 @@ Since our Random Forest Classifier was the best of all three models, we decided 
 
 
 ### Results from our Machine Learning Model
-The RandomForest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 93%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
+The new Random Forest model did the best job in training and learning which features make for a viral video. Giving us the best accuracy score at 99%, as well as the highest pression and recall score, the model is the best at being able to predict with the features which video will gain 1 million views. And with one simple function, we were able to categorize which features were the most important when making it's calculations. So going back to our original question, which YouTube video and channel metrics play the biggest role in creating a video that will gain the largest amount of views?, below the bar graph answers our question. Subscriber count and the amount of videos seem to have the strongest correlation.
 
 ![features_graph](https://user-images.githubusercontent.com/105755095/201761450-4717fe61-44a9-49a0-80eb-514fc0d0e5ca.png)
 
