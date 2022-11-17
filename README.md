@@ -4,7 +4,9 @@
 
 ## About 
 
-Final group project of the UT Data Analytics Bootcamp. The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
+Final group project of the UT Data Analytics Bootcamp. 
+
+The purpose of this project is to analyze data from top YouTube channels and determine what features are most likely to drive videos past the 1 million view count threshold
 
 ## Overview
 
