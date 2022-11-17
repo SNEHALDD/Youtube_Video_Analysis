@@ -268,13 +268,13 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
 
 ### Tools : 
 1) Git Dash
--Following Visuaizations and graphs have been added:
-- Channel Category Metrics,
-- Top Channels,
-- Video Length Metrics,
-- Comment Sentiment Analysis,
-- Video Publishing Metrics,
-- Machine Leaning Visualization.
+- Following Visuaizations and graphs have been added:
+  - Channel Category Metrics,
+  - Top Channels,
+  - Video Length Metrics,
+  - Comment Sentiment Analysis,
+  - Video Publishing Metrics,
+  - Machine Leaning Visualization.
 
 #### Interactive element(s):
 - Created multiple metrics such as View Count, Subscriber Count, Comment Count,
@@ -284,10 +284,10 @@ As shown in this [file](https://raw.githubusercontent.com/SNEHALDD/Youtube_Video
 
 2) Tableau Public
 - Following Visuaizations and graphs have been added:
-- Total number of Subscribers, Views, Likes, Comments of each Category,
-- Total number of Subscribers, Views, Likes, Comments of the Channel,
-- Total number of Views according to Video Length,
-- Popular Categories on the basis of Like Count.
+  - Total number of Subscribers, Views, Likes, Comments of each Category,
+  - Total number of Subscribers, Views, Likes, Comments of the Channel,
+  - Total number of Views according to Video Length,
+  - Popular Categories on the basis of Like Count.
 
 #### Interactive element(s):
 - Dropdown menu which will show list of all the categories. Once you choose the category, graph will show corelation between Video length and number of   views.
