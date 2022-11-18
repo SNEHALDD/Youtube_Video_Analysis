@@ -750,7 +750,8 @@ def update_graph(checklist, xaxis):
 def update_graph(yaxis, totmean):
     alt_df = mega_df2.groupby('channel_id_x').agg({'subscriber_count': totmean, 'view_count': totmean, 'comment_count': totmean,
                                                    'sentiment': totmean, 'video_length_seconds': totmean, 'topic_category': 'first', 'custom_url': 'first'}).reset_index()
-    fig = px.bar(alt_df.sort_values(yaxis, ascending=False).head(20), orientation='h',
+    fig = px.bar(alt_df.sort_values(yaxis, ascending=False).head(20), orientation='h', labels={'video_length_seconds': 'Video Length (seconds)', 'topic_category': 'Category', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                                    'topic_category': 'Category', 'custom_url': 'Channel', 'subscriber_count': 'Subscribers', 'day_of_week_published': 'Day of Week Published'},
                  y="custom_url", x=yaxis, title='Top Channels', color='topic_category', template=template, height=600, width=1000)
     fig.update_layout(yaxis_categoryorder='total ascending')
     return fig
@@ -780,25 +781,25 @@ def update_graph(feature1, feature2, feature3, feature4, feature5, length, views
             fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                                 x=feature1, y=feature2, z=feature3, height=800, width=1000, log_x=logscale, log_y=logscale, log_z=logscale,
                                 labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
-                                'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                                'topic_category': 'Category', 'channel_title': 'Channel', 'video_views_binned': 'views','day_of_week_published': 'Day of Week Published'},
                                 hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
         else:
             fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                                 x=feature1, y=feature2, z=feature3, color=feature4, color_continuous_scale=[(0, "red"),(.5, "yellow"), (1, "green")],height=800, width=1000, log_x=logscale, log_y=logscale, log_z=logscale,
                                 labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
-                                'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
+                                'topic_category': 'Category', 'channel_title': 'Channel', 'video_views_binned': 'views','day_of_week_published': 'Day of Week Published'},
                                 hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
     elif feature4 == 'none':
         fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                             x=feature1, y=feature2, z=feature3, symbol=feature5, height=800, width=1000, log_x=logscale, log_y=logscale, log_z=logscale,
-                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'video_views_binned': 'views','comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
     else:
         fig = px.scatter_3d(filtered_df[(filtered_df['video_length_seconds'] >= transform_value(length[0])) & (filtered_df['video_length_seconds'] <= transform_value(length[1])) & (filtered_df['view_count'] >= transform_value(views[0])) & (filtered_df['view_count'] <= transform_value(views[1]))], template=template,
                             x=feature1, y=feature2, z=feature3, color=feature4, color_continuous_scale=[(0, "red"),(.5, "yellow"), (1, "green")],symbol=feature5, height=800, width=1000, log_x=logscale, log_y=logscale, log_z=logscale,
                             symbol_sequence=['circle','diamond', 'square', 'x'],
-                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'video_views_binned': 'views', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
 
