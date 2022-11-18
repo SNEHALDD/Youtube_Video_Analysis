@@ -19,7 +19,7 @@ fig4 = px.histogram(binned_data, x="day_of_week_published",template=template,
                     category_orders={'video_views_binned': [
                         'less than 100 views', 'less than 1000 views', '1,000-10,000 views', '10,000-50,000 views', '50,000-500,000', '500,000- 1 million views', 'over 1 million views', 'over 5 million views', 'over 1 billion views']},
                     color_discrete_sequence=px.colors.sequential.thermal,
-                    labels={'day_of_week_published': 'Day of Week'})
+                    labels={'day_of_week_published': 'Day of Week', 'video_views_binned': 'Video Views'})
 fig4.update_xaxes(categoryorder="array", categoryarray=[
                   "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"])
 
@@ -29,7 +29,7 @@ fig5 = px.histogram(binned_data, x=binned_data['published_at'].dt.hour,template=
                     category_orders={'video_views_binned': [
                         'less than 100 views', 'less than 1000 views', '1,000-10,000 views', '10,000-50,000 views', '50,000-500,000', '500,000- 1 million views', 'over 1 million views', 'over 5 million views', 'over 1 billion views']},
                     color_discrete_sequence=px.colors.sequential.thermal,
-                    labels={'x':'Time of Day Published', 'y':'Number of Videos'})
+                    labels={'x':'Time of Day Published', 'y':'Number of Videos', 'video_views_binned':'Video Views'})
 
 fig5.update_xaxes(ticktext=['12AM',  '2AM',  '4AM',  '6AM',  '8AM', '10AM',  '12PM',  '2PM', '4PM', '6PM', '8PM',  '10PM', ],
                   tickvals=[0, 2, 4,  6,  8,  10,  12,  14,  16,  18, 20,  22, ], tickangle=45)
@@ -43,7 +43,7 @@ fig7 = px.scatter_3d(binned_data, x='view_count', y='like_count', z='comment_cou
 
 fig8 = px.scatter_3d(mega_df2, template=template,
                             x='view_count', y='video_length_seconds', z='comment_count', color='topic_category' ,symbol='day_of_week_published', height=800, width=1000, log_x=True, log_y=True, log_z=True,
-                            labels={'video_length_seconds': 'Video Length (seconds)', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
+                            labels={'video_length_seconds': 'Video Length (seconds)', 'topic_category': 'Category', 'view_count': 'Video Views', 'comment_count': "Number of Video Comments",
                                     'topic_category': 'Category', 'channel_title': 'Channel', 'day_of_week_published': 'Day of Week Published'},
                             hover_data=['custom_url', 'topic_category', 'view_count', 'video_length_seconds'])
 
@@ -57,7 +57,7 @@ fig8.update_traces(marker=dict(size=3, line=dict(width=1, color='DarkSlateGrey')
 
 fig9 = px.scatter(binned_data2, x='new_length', y='video_views', 
     template=template, title='Video Lengths vs Views', color='topic_category', height=600, width=1000, 
-    labels={'new_length':'Video Length (seconds)', 'video_views':'Views'}, log_y=True, log_x=True, hover_data=['custom_url', 'topic_category', 'view_count'])
+    labels={'new_length':'Video Length (seconds)', 'video_views':'Views', 'topic_category': 'Category'}, log_y=True, log_x=True, hover_data=['custom_url', 'topic_category', 'view_count'])
 fig9.update_traces(
     # change marker size
     marker=dict(size=5, line=dict(width=1, color='DarkSlateGrey')),
